@@ -1,0 +1,1010 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.05.26"]
+[Round "-"]
+[White "JPON24"]
+[Black "saforin"]
+[Result "1-0"]
+[WhiteElo "1898"]
+[BlackElo "1891"]
+[TimeControl "60"]
+[EndTime "1:20:32 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 Nf6 4. dxe5 Ng8 5. Nc3 Bb4 6. Bb5 Nge7 7. O-O O-O 8.
+Bd2 a6 9. Bd3 d6 10. exd6 Bxd6 11. Re1 Ne5 12. Nxe5 Bxe5 13. f4 Bd4+ 14. Be3
+Bxc3 15. bxc3 f5 16. e5 Nd5 17. Qh5 Nxc3 18. Bc4+ Kh8 19. e6 Qe7 20. Bc5 Qf6 21.
+e7 Bd7 22. exf8=Q+ Rxf8 23. Bxf8 Qxf8 24. Be6 Bxe6 25. Rxe6 Ne4 26. Re8 Kg8 27.
+Rxf8+ Kxf8 28. Rd1 g6 29. Rd8+ Ke7 30. Qh4+ Nf6 31. Rd3 Ke6 32. Re3+ Kf7 33. Qg5
+Ne4 34. Rxe4 fxe4 35. Qe5 c6 36. Qxe4 b5 37. Qd4 a5 38. Qd3 c5 39. Qf3 c4 40.
+Qd5+ Kg7 41. Qxb5 c3 42. Qc4 Kh6 43. Qxc3 g5 44. Qg3 gxf4 45. Qxf4+ Kg6 46. Qg3+
+Kf7 47. Qa3 Ke6 48. Qxa5 Kd7 49. Qc3 Ke6 50. Qe3+ Kf7 51. Qg3 h6 52. c3 h5 53.
+Qe5 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.05.28"]
+[Round "-"]
+[White "JPON24"]
+[Black "arteandaluz"]
+[Result "1-0"]
+[WhiteElo "1906"]
+[BlackElo "1885"]
+[TimeControl "60"]
+[EndTime "1:36:46 GMT+0000"]
+[Termination "JPON24 won by resignation"]
+
+1. e4 Nf6 2. e5 Nd5 3. c4 Nb6 4. d4 d6 5. exd6 exd6 6. Nf3 Nc6 7. Nc3 Be7 8. d5
+Ne5 9. Be2 Nxf3+ 10. Bxf3 Bf6 11. O-O O-O 12. Re1 Bf5 13. Bf4 Nd7 14. Be4 Bxe4
+15. Rxe4 Nc5 16. Re3 Qd7 17. Rg3 Kh8 18. Qh5 Rae8 19. Rh3 Qxh3 20. Qxh3 Nd3 21.
+Qxd3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.05.28"]
+[Round "-"]
+[White "JPON24"]
+[Black "jorgebarros97"]
+[Result "0-1"]
+[WhiteElo "1898"]
+[BlackElo "1906"]
+[TimeControl "60"]
+[EndTime "2:57:26 GMT+0000"]
+[Termination "jorgebarros97 won on time"]
+
+1. e4 e6 2. Nf3 d5 3. exd5 exd5 4. d4 Be7 5. c4 Nf6 6. Nc3 O-O 7. Bg5 c6 8. Be2
+Re8 9. O-O h6 10. Re1 hxg5 11. Nxg5 dxc4 12. Bh5 g6 13. Be2 Bf8 14. Bxc4 Nd5 15.
+Nxd5 cxd5 16. Bb5 Rxe1+ 17. Qxe1 Bg7 18. Nf3 Nd7 19. Rc1 Nf6 20. Qe3 Bg4 21. Qg5
+Bxf3 22. gxf3 Qe7 23. Kf1 a6 24. Re1 Qd8 25. Bd3 b5 26. f4 Ne4 27. Bxe4 Qxg5 28.
+fxg5 dxe4 29. Rxe4 Rd8 30. f4 Rxd4 31. Rxd4 Bxd4 32. b3 Kg7 33. Ke2 Bb6 34. Kf3
+f6 35. Ke4 f5+ 36. Ke5 Kf7 37. h4 Bc5 38. Kd5 Ba3 39. Kd4 a5 40. Kd3 a4 41. Kc3
+axb3 42. axb3 b4+ 43. Kc4 Ke6 44. Kc5 Kf7 45. Kc4 Ke6 46. Kc5 Kd7 47. Kc4 Kd6
+48. Kb5 Kd5 49. Ka5 Ke4 50. Ka4 Kxf4 51. Ka5 Kg4 52. Ka4 Kxh4 53. Kb5 Kxg5 54.
+Ka4 Kf6 55. Kb5 f4 56. Ka4 f3 57. Kb5 f2 58. Ka4 f1=Q 59. Ka5 Qb1 60. Ka4 Qxb3+
+61. Ka5 Qb2 62. Kb6 b3 63. Kb7 Qc2 64. Kb6 Qb2 65. Ka6 Qc2 66. Ka5 b2 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.05.28"]
+[Round "-"]
+[White "lilmoic"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1951"]
+[BlackElo "1891"]
+[TimeControl "60"]
+[EndTime "3:33:41 GMT+0000"]
+[Termination "lilmoic won by checkmate"]
+
+1. e4 c6 2. d4 d5 3. e5 e6 4. Nf3 c5 5. c3 Nc6 6. Bd3 Nge7 7. O-O g6 8. Bg5 Bg7
+9. Bxe7 Qxe7 10. h4 O-O 11. Ng5 h6 12. Nh3 cxd4 13. cxd4 Nxd4 14. Bxg6 fxg6 15.
+Qxd4 b6 16. Nc3 Ba6 17. Qg4 Bxf1 18. Rxf1 Qe8 19. Nf4 g5 20. Nxe6 Rf4 21. Nxf4
+gxf4 22. Nxd5 Qxe5 23. Nxf4 Rf8 24. Ng6 Qf5 25. Qc4+ Kh7 26. Nxf8+ Qxf8 27. Qd3+
+Kh8 28. Rd1 Bf6 29. Qd7 Qg7 30. Qe6 Kh7 31. Rd7 Bxb2 32. Rxg7+ Bxg7 33. Qd7 a5
+34. Qa7 b5 35. Qb6 a4 36. Qxb5 a3 37. Qa4 Bb2 38. Qb3 Bc1 39. f4 Bb2 40. g4 Bc1
+41. Kg2 Bb2 42. Kf3 Bc3 43. Ke4 Bb2 44. Kf5 Bc1 45. Qe6 Bb2 46. Qe7+ Bg7 47. Qf7
+Kh8 48. Kg6 h5 49. Qxg7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.04"]
+[Round "-"]
+[White "JPON24"]
+[Black "fdroin"]
+[Result "1-0"]
+[WhiteElo "1899"]
+[BlackElo "1873"]
+[TimeControl "60"]
+[EndTime "14:28:18 GMT+0000"]
+[Termination "JPON24 won by resignation"]
+
+1. e4 g6 2. Nf3 b6 3. d4 Bb7 4. Bd3 Bg7 5. c4 c6 6. Nc3 e6 7. O-O d5 8. exd5
+cxd5 9. Re1 Ne7 10. Bg5 Qd7 11. cxd5 exd5 12. Bb5 Nc6 13. Ne5 O-O 14. Nxd7 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "JPON24"]
+[Black "zlewis29"]
+[Result "1-0"]
+[WhiteElo "1907"]
+[BlackElo "1872"]
+[TimeControl "60"]
+[EndTime "0:51:00 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Bc5 5. Nf3 Qf6 6. Nc3 d6 7. Bd3 Bg4 8.
+O-O Bxf3 9. Qxf3 Qxf3 10. gxf3 Nd4 11. Kg2 O-O-O 12. Ne2 Ne6 13. Be3 Bb6 14. a4
+Bxe3 15. fxe3 Ne7 16. a5 h5 17. b4 h4 18. b5 Nc5 19. b6 cxb6 20. axb6 a6 21. Nd4
+g5 22. Nf5 Nxf5 23. exf5 Nxd3 24. cxd3 Rhf8 25. Rac1+ Kb8 26. Rc7 Rc8 27. Rfc1
+Rxc7 28. Rxc7 a5 29. Rc4 Re8 30. Ra4 Re5 31. e4 d5 32. Kf2 dxe4 33. fxe4 Kc8 34.
+Rd4 a4 35. Rxa4 g4 36. Ra8+ Kd7 37. Ra4 Kc6 38. Rb4 Kc5 39. Ke3 Kxb4 40. Kd4 Re7
+41. Kd5 Kb5 42. Kd6 Re8 43. e5 f6 44. e6 g3 45. hxg3 hxg3 46. Kd7 Rxe6 47. Kxe6
+g2 48. Kxf6 g1=Q 49. Ke7 Qd4 50. f6 Qxd3 51. Kf7 Qf5 52. Kg7 Kxb6 53. f7 Qf6+
+54. Kxf6 Kc5 55. f8=Q+ Kb5 56. Qe7 b6 57. Qe6 Ka6 58. Ke5 Kb7 59. Qd5+ Kc7 60.
+Kd4 Kb8 61. Kc3 Ka7 62. Kb4 Ka6 63. Qb5+ Ka7 64. Qd7+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "upsidein"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1939"]
+[BlackElo "1900"]
+[TimeControl "60"]
+[EndTime "0:52:59 GMT+0000"]
+[Termination "upsidein won by checkmate"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. f3 Nf6 5. fxe4 g6 6. Bd3 Bg7 7. h4 O-O 8. h5
+Nbd7 9. hxg6 fxg6 10. Bh6 Re8 11. Qd2 Nf8 12. Nf3 Bg4 13. O-O-O b5 14. e5 Nd5
+15. Nxd5 Qxd5 16. Bxg7 Kxg7 17. Qh6+ Kg8 18. Ng5 Bxd1 19. Bxg6 Bxc2 20. Bxc2 Qc4
+21. Nxh7 Nxh7 22. Qxh7+ Kf8 23. Rf1+ Qf7 24. Qxf7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "JPON24"]
+[Black "romaine_empire"]
+[Result "0-1"]
+[WhiteElo "1892"]
+[BlackElo "1906"]
+[TimeControl "60"]
+[EndTime "0:55:06 GMT+0000"]
+[Termination "romaine_empire won by checkmate"]
+
+1. d4 d5 2. c4 Nf6 3. Nc3 e6 4. e3 c5 5. Nf3 cxd4 6. Nxd4 Nc6 7. cxd5 Nxd4 8.
+Qxd4 exd5 9. Bb5+ Bd7 10. O-O Bxb5 11. Nxb5 b6 12. Bd2 Bc5 13. Qc3 O-O 14. Rac1
+Ne4 15. Qd3 Nxd2 16. Qxd2 a5 17. a3 Qd7 18. Nd4 Rfd8 19. Rfd1 b5 20. Rxc5 Rac8
+21. Rdc1 Rxc5 22. Rxc5 b4 23. axb4 axb4 24. Qxb4 Ra8 25. g3 Qh3 26. Ra5 Rc8 27.
+Rc5 Ra8 28. Rc1 g6 29. Qd6 Qh5 30. Nc2 Qe2 31. Ne1 Qxb2 32. Rd1 Ra2 33. Qf4 g5
+34. Qxg5+ Kf8 35. Qf4 d4 36. Ng2 Qe2 37. Rxd4 Ra1+ 38. Ne1 Qxe1+ 39. Kg2 Qf1+
+40. Kf3 Ra2 41. Kg4 Rxf2 42. Qb8+ Kg7 43. Qe5+ Rf6 44. Qh5 Rg6+ 45. Kh4 Qf6+ 46.
+Kh3 Qf2 47. Rh4 Qf1# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "JefCC"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1945"]
+[BlackElo "1901"]
+[TimeControl "60"]
+[EndTime "0:57:21 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. d4 c6 2. c4 d5 3. Nc3 e6 4. cxd5 Nf6 5. dxe6 Bxe6 6. a3 Bd6 7. e3 Nbd7 8. Nf3
+O-O 9. Be2 Re8 10. O-O Nf8 11. b4 Qe7 12. Bb2 Rad8 13. Nd2 Qd7 14. Re1 Bg4 15.
+Nf1 Bxe2 16. Nxe2 Ne4 17. Neg3 Nxg3 18. Nxg3 Bxg3 19. hxg3 Qf5 20. Qc1 Qg6 21.
+Qc5 Rd5 22. Qxa7 Qh6 23. Qxb7 Rh5 24. Kf1 Rh1+ 25. Ke2 Rxe1+ 26. Rxe1 Qh5+ 27.
+Kd2 Ne6 28. Qxc6 Rd8 29. Kc1 Qf5 30. g4 Qxg4 31. Kb1 Qf5+ 32. Ka1 Qd5 33. Qxd5
+Rxd5 34. Rc1 g6 35. Rc8+ Kg7 36. e4 Rg5 37. d5+ Nd4 38. Bxd4+ Kh6 39. g3 Rg4 40.
+Rc1 Rxe4 41. Rh1+ Kg5 42. Be3+ Kf6 43. Rh6 Ke7 44. Rxh7 Rc4 45. Rh4 Rc7 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "JPON24"]
+[Black "Cisticcc"]
+[Result "0-1"]
+[WhiteElo "1893"]
+[BlackElo "1927"]
+[TimeControl "60"]
+[EndTime "0:59:31 GMT+0000"]
+[Termination "Cisticcc won on time"]
+
+1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd8 4. Nf3 Nf6 5. Bd3 g6 6. O-O Bg7 7. Qe2 O-O 8.
+Re1 Nd5 9. Nxd5 Qxd5 10. Be4 Qd8 11. d3 Bg4 12. Bf4 e5 13. Bg3 Nc6 14. Bxc6 bxc6
+15. h3 Bxf3 16. Qxf3 Re8 17. Qxc6 Rb8 18. b3 Rb6 19. Qf3 e4 20. Rxe4 Bxa1 21.
+Rh4 Bg7 22. Rf4 Be5 23. Rxf7 Bxg3 24. fxg3 Rbe6 25. Rf4 Re1+ 26. Kh2 R1e7 27.
+Qg4 Qd6 28. Rd4 Qf6 29. Rc4 Qe6 30. Ra4 Qxg4 31. Rxg4 c6 32. Rc4 Re2 33. Rxc6
+Rf2 34. Rc7 Ree2 35. h4 Rxg2+ 36. Kh3 Rxc2 37. Rxa7 Rxa2 38. Rb7 Rab2 39. b4
+Rgd2 40. b5 Rxd3 41. b6 Rbb3 42. Rb8+ Kg7 43. b7 Rd7 44. Rg8+ Kxg8 45. b8=Q+
+Rxb8 46. Kg4 Rbd8 47. Kh3 Rd3 48. Kg4 Rc8 49. Kg5 Rcc3 50. Kg4 Rxg3+ 51. Kf4 Rh3
+52. Ke4 Rxh4+ 53. Kd5 Rf4 54. Kd6 Rf7 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.07"]
+[Round "-"]
+[White "AF52"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1929"]
+[BlackElo "1886"]
+[TimeControl "60"]
+[EndTime "1:00:50 GMT+0000"]
+[Termination "AF52 won by resignation"]
+
+1. d4 d5 2. Nc3 c6 3. e4 e6 4. e5 c5 5. Nf3 Nc6 6. Bg5 cxd4 7. Bxd8 dxc3 8. Bh4
+cxb2 9. Rb1 Ba3 10. Bb5 Bd7 11. Bxc6 Bxc6 12. Nd4 Rc8 13. Nxc6 Rxc6 14. O-O Ne7
+15. Bxe7 Kxe7 16. Qd3 Rhc8 17. Qxa3+ Ke8 18. Qxb2 Rxc2 19. Qxb7 R2c7 20. Qb5+
+Kf8 21. h3 Rc5 22. Qb4 Kg8 23. a3 Rc4 24. Qb7 R4c7 25. Qb3 Rc3 26. Qd1 Rxa3 27.
+Qg4 Rac3 28. Rb7 R3c4 29. Qf3 Rc3 30. Qxf7+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.11"]
+[Round "-"]
+[White "JPON24"]
+[Black "SAPNIL"]
+[Result "1-0"]
+[WhiteElo "1894"]
+[BlackElo "1872"]
+[TimeControl "60"]
+[EndTime "18:32:24 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 e5 2. Nf3 Qf6 3. Nc3 c6 4. d4 d6 5. dxe5 dxe5 6. Bg5 Qd6 7. Qxd6 Bxd6 8.
+O-O-O Bc7 9. Nxe5 f6 10. Bc4 fxg5 11. Nf7 b5 12. Bb3 a5 13. a3 Nf6 14. Nxh8 Ke7
+15. Nf7 Be6 16. Bxe6 Kxe6 17. Nxg5+ Ke7 18. Rhe1 Bf4+ 19. Kb1 Ng4 20. Nf3 Nxf2
+21. Rd3 Nxd3 22. cxd3 Nd7 23. g3 Bh6 24. Kc2 b4 25. axb4 axb4 26. Ne2 Rb8 27.
+Nf4 b3+ 28. Kc3 Nb6 29. Nd4 Na4+ 30. Kc4 c5 31. Nc6+ Kd6 32. Nxb8 g6 33. Kxb3
+Nb6 34. Na6 Kc6 35. Nxc5 Kxc5 36. Ne6+ Kb5 37. Rc1 g5 38. Nc7+ Ka5 39. Nd5 Nxd5
+40. exd5 Bg7 41. d6 Be5 42. d7 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.12"]
+[Round "-"]
+[White "JPON24"]
+[Black "devPerph"]
+[Result "1/2-1/2"]
+[WhiteElo "1894"]
+[BlackElo "1880"]
+[TimeControl "60"]
+[EndTime "15:03:35 GMT+0000"]
+[Termination "Game drawn by repetition"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 e6 5. Nxc6 bxc6 6. Nc3 Nf6 7. Bg5 Be7 8.
+Bxf6 Bxf6 9. Bd3 O-O 10. Qd2 d5 11. exd5 cxd5 12. O-O Bb7 13. Rfe1 Qc7 14. Rad1
+Rfe8 15. Qe2 a6 16. Qh5 g6 17. Qh6 Bg7 18. Qh4 Qc6 19. Re3 f5 20. Rh3 h6 21. Ne2
+d4 22. Nf4 g5 23. Qg3 gxf4 24. Qg6 Kh8 25. Rxh6+ Bxh6 26. Qxh6+ Kg8 27. Qg6+ Kf8
+28. Qf6+ Kg8 29. Qg6+ Kf8 30. Qf6+ Kg8 31. Qg6+ 1/2-1/2
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.12"]
+[Round "-"]
+[White "JPON24"]
+[Black "mismatches123"]
+[Result "0-1"]
+[WhiteElo "1886"]
+[BlackElo "1906"]
+[TimeControl "60"]
+[EndTime "2:27:58 GMT+0000"]
+[Termination "mismatches123 won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Bc5 4. O-O Nd4 5. Nxd4 Bxd4 6. Nc3 Bb6 7. Re1 c6 8.
+Ba4 d6 9. Bb3 h6 10. d3 Ne7 11. Be3 O-O 12. Bxb6 axb6 13. Re3 Kh7 14. Qf3 f5 15.
+Qh5 f4 16. Ree1 f3 17. Re3 fxg2 18. Ne2 Ng6 19. Rg3 Qf6 20. d4 Qxf2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.12"]
+[Round "-"]
+[White "Bucky_123"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1909"]
+[BlackElo "1895"]
+[TimeControl "60"]
+[EndTime "4:42:08 GMT+0000"]
+[Termination "JPON24 won by resignation"]
+
+1. f4 d5 2. e4 c6 3. e5 e6 4. Ne2 c5 5. d4 Nc6 6. Ng1 Nge7 7. Nf3 g6 8. Bd3 Bg7
+9. Ng5 O-O 10. Qg4 h6 11. Nf3 Nf5 12. c3 cxd4 13. cxd4 Ncxd4 14. Bxf5 Nxf3+ 15.
+Qxf3 exf5 16. O-O Qb6+ 17. Kh1 Be6 18. Nc3 Rac8 19. Na4 Qb4 20. b3 b5 21. Nb2
+Rc3 22. Nd3 Qe4 23. Qxe4 dxe4 24. Nb4 Rfc8 25. Bb2 Re3 26. Ba3 a5 27. Na6 Rc6
+28. Nb8 Rc7 29. Na6 Rc8 30. b4 Rxa3 31. bxa5 Rxa5 32. Nb4 Ra4 33. a3 Rc3 34.
+Rfc1 Rxc1+ 35. Rxc1 Rxa3 36. Nc6 Bb3 37. Ne7+ Kh7 38. Rc7 Ra1+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "JPON24"]
+[Black "StarWaral"]
+[Result "1-0"]
+[WhiteElo "1904"]
+[BlackElo "1920"]
+[TimeControl "60"]
+[EndTime "15:45:54 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 e6 2. Nf3 Be7 3. d4 Nc6 4. Nc3 d5 5. Be3 dxe4 6. Nxe4 Nf6 7. c3 Nxe4 8.
+Bd3 Nf6 9. Qc2 h6 10. O-O-O b6 11. Kb1 Bb7 12. Rhe1 Nd5 13. Bc1 O-O 14. g4 g5
+15. h4 f6 16. Bh7+ Kg7 17. Qg6+ Kh8 18. Qxh6 Rf7 19. Bg6+ Kg8 20. Bxf7+ Kxf7 21.
+hxg5 fxg5 22. Qh7+ Ke8 23. Ne5 Nxe5 24. Rxe5 Kd7 25. Bxg5 Qf8 26. Bxe7 Nxe7 27.
+Rf1 Bf3 28. g5 Qh8 29. Qxh8 Rxh8 30. g6 Nxg6 31. Rg5 Nf4 32. Rg3 Bd5 33. Kc2 Ne2
+34. Re3 Nf4 35. Rg1 Rh2 36. Rg7+ Kd6 37. Rgg3 Rxf2+ 38. Kb1 Nh5 39. Kc1 Nxg3 40.
+Rxg3 Rf1+ 41. Kd2 Be4 42. Re3 Bf5 43. Re2 Rb1 44. Re1 Rxb2+ 45. Ke3 Rb5 46. Re2
+1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "3LioRR"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1884"]
+[BlackElo "1912"]
+[TimeControl "60"]
+[EndTime "15:47:17 GMT+0000"]
+[Termination "JPON24 won by resignation"]
+
+1. e4 c6 2. Nc3 d5 3. exd5 cxd5 4. d4 e6 5. Be3 Nf6 6. Be2 Nc6 7. Bd3 Bb4 8. Nf3
+Qe7 9. Bd2 O-O 10. a3 Bd6 11. h3 Re8 12. Qc1 e5 13. O-O e4 14. Ne5 exd3 15. Nxc6
+bxc6 16. cxd3 Ba6 17. Re1 Qc7 18. Re3 Rxe3 19. Bxe3 Bxd3 20. Qd2 Be4 21. Re1
+Bh2+ 22. Kh1 Re8 23. f3 Bg6 24. Bg1 Rxe1 25. Qxe1 Bxg1 26. Kxg1 h6 27. Kf2 Qf4
+28. Qe2 Qxd4+ 29. Kf1 Bd3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "JPON24"]
+[Black "enrique719"]
+[Result "0-1"]
+[WhiteElo "1904"]
+[BlackElo "1906"]
+[TimeControl "60"]
+[EndTime "15:49:31 GMT+0000"]
+[Termination "enrique719 won on time"]
+
+1. e4 c5 2. Nf3 d5 3. d4 dxe4 4. Ng5 cxd4 5. Nxe4 Nc6 6. Bb5 Qa5+ 7. Bd2 Qxb5 8.
+b3 e5 9. Na3 Qd5 10. Qf3 f5 11. Ng5 e4 12. Qh5+ g6 13. Qh4 Be7 14. Nc4 h6 15. f4
+e3 16. Bxe3 dxe3 17. Rd1 Bb4+ 18. Ke2 Qb5 19. Rd8+ Nxd8 20. Ne6 Bxe6 21. Re1 Bd2
+22. Rd1 Bxc4+ 23. Kf3 Be2+ 24. Kg3 Bxd1 25. Kh3 Qd7 26. g3 Qe7 27. g4 Qxh4+ 28.
+Kxh4 Be1+ 29. Kh3 Bf2 30. Kg2 e2 31. Kxf2 e1=Q+ 32. Kxe1 Ne6 33. Kd2 O-O-O+ 34.
+Kc1 Nd4 35. Kb2 Ne2 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "Sivandan"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1901"]
+[BlackElo "1896"]
+[TimeControl "60"]
+[EndTime "15:50:12 GMT+0000"]
+[Termination "Sivandan won by resignation"]
+
+1. e4 c6 2. Nf3 d5 3. Nc3 dxe4 4. Nxe4 Nf6 5. d3 Nbd7 6. Nxf6+ Nxf6 7. Bg5 e6 8.
+Be2 Be7 9. O-O O-O 10. Qd2 Bd7 11. Rad1 c5 12. h3 Bc6 13. Nh2 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "JPON24"]
+[Black "Fit4Chess"]
+[Result "1-0"]
+[WhiteElo "1903"]
+[BlackElo "1866"]
+[TimeControl "60"]
+[EndTime "0:29:53 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 c6 2. d4 d5 3. Nc3 e6 4. exd5 cxd5 5. Nf3 Ne7 6. Bd3 Ng6 7. O-O Be7 8. Bd2
+Nc6 9. Re1 O-O 10. a3 f5 11. Qe2 Bf6 12. Ne5 Ncxe5 13. dxe5 Nxe5 14. f4 Nxd3 15.
+Qxd3 d4 16. Ne2 a6 17. Rad1 Bd7 18. c3 Bb5 19. Qf3 d3 20. Ng3 Bc6 21. Qf2 Qc7
+22. Rxe6 Be7 23. Rde1 Bd8 24. R6e5 Bf6 25. Rxf5 Bd7 26. Rd5 Bc6 27. Rd4 Bxd4 28.
+Qxd4 Rad8 29. Qe5 Qd7 30. Qe6+ Qxe6 31. Rxe6 Rde8 32. Re5 Rxe5 33. fxe5 Re8 34.
+Bf4 g5 35. Bxg5 Rxe5 36. Bf4 Re1+ 37. Kf2 Rb1 38. Ke3 Bxg2 39. Kxd3 Rxb2 40. Nf5
+Kf7 41. Nd6+ Ke6 42. Nc4 Ra2 43. Bg3 Bf1+ 44. Kd4 Bxc4 45. Kxc4 Rxa3 46. Kb4 Ra1
+47. Kc4 Rc1 48. Kd3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.13"]
+[Round "-"]
+[White "Apgd1"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1900"]
+[BlackElo "1895"]
+[TimeControl "60"]
+[EndTime "1:06:00 GMT+0000"]
+[Termination "Apgd1 won on time"]
+
+1. d3 c6 2. Nf3 d5 3. e4 e6 4. exd5 cxd5 5. Nc3 Nf6 6. Bf4 Nc6 7. Nb5 e5 8. Nxe5
+Nxe5 9. Bxe5 Qe7 10. Nc7+ Kd7 11. Nxa8 Qxe5+ 12. Qe2 Bb4+ 13. c3 Bxc3+ 14. Kd1
+Bxb2 15. Rb1 Qxe2+ 16. Bxe2 Be5 17. g3 Re8 18. f4 Bb8 19. g4 b6 20. g5 Ng8 21.
+Bg4+ Kd8 22. Bxc8 Kxc8 23. Rc1+ Kb7 24. Re1 Rxe1+ 25. Kxe1 Kxa8 26. Rc8 Ne7 27.
+Re8 Nc6 28. Rh8 Nd4 29. Kd2 Kb7 30. Rxh7 Bxf4+ 31. Kc3 Nb5+ 32. Kb4 a6 33. Rxg7
+Nd6 34. Kb3 Bxh2 35. g6 Be5 36. Rg8 fxg6 37. Rxg6 Kc6 38. Rh6 Bd4 39. Rh5 Bc5
+40. a4 Bd4 41. Rh4 Bc5 42. d4 b5 43. dxc5 Kxc5 44. Rh5 bxa4+ 45. Kxa4 Nb5 46.
+Rh8 Nc3+ 47. Ka3 d4 48. Kb2 Kc4 49. Rc8+ Kd3 50. Rc4 Ke3 51. Rxd4 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "EGORCHESS1234"]
+[Result "1-0"]
+[WhiteElo "1904"]
+[BlackElo "1941"]
+[TimeControl "60"]
+[EndTime "18:32:56 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 d5 2. exd5 Nf6 3. Nc3 Nxd5 4. Nxd5 Qxd5 5. Nf3 Bg4 6. Be2 Nc6 7. h3 Bh5 8.
+d3 O-O-O 9. Bf4 f6 10. Bg3 e5 11. O-O g5 12. Nd2 Bxe2 13. Qxe2 h5 14. Rfe1 g4
+15. Qe4 Qf7 16. Qf5+ Kb8 17. Bxe5 Bc5 18. Qxf6 Qd5 19. Qxh8 g3 20. Qxd8+ Nxd8
+21. Bxg3 Qg5 22. Ne4 Qxg3 23. Nxg3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "LopezMaster31"]
+[Result "0-1"]
+[WhiteElo "1897"]
+[BlackElo "1933"]
+[TimeControl "60"]
+[EndTime "19:01:39 GMT+0000"]
+[Termination "LopezMaster31 won by checkmate"]
+
+1. e4 e6 2. Nf3 d5 3. exd5 exd5 4. d4 Nc6 5. c4 Bb4+ 6. Nc3 Nf6 7. Bd2 O-O 8.
+cxd5 Re8+ 9. Be2 Bxc3 10. Bxc3 Nxd5 11. O-O Nf4 12. Bb5 Bg4 13. h3 Bh5 14. g4
+Bg6 15. Kh2 a6 16. Bxc6 bxc6 17. Ne5 Qd5 18. Rg1 Be4 19. Qd2 g5 20. h4 h6 21.
+hxg5 hxg5 22. f3 Bxf3 23. Nxf3 Qxf3 24. Rg3 Re2+ 25. Qxe2 Qxe2+ 26. Rg2 Qxg2#
+0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "FredMauricio"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1898"]
+[BlackElo "1905"]
+[TimeControl "60"]
+[EndTime "19:04:03 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 c6 2. d3 d5 3. e5 e6 4. f4 c5 5. Nf3 Nc6 6. Be2 Nge7 7. O-O Nf5 8. c3 g6
+9. Na3 Bg7 10. Nc2 O-O 11. Ne3 d4 12. Nxf5 exf5 13. c4 Be6 14. h3 a6 15. Nh2 Qa5
+16. Bf3 Qc7 17. Bd2 Rac8 18. a3 Rfd8 19. Qe2 b5 20. b3 bxc4 21. bxc4 Na5 22.
+Rab1 Rb8 23. g4 fxg4 24. hxg4 Nb3 25. Be1 a5 26. Bg3 a4 27. Be4 Qa5 28. f5 gxf5
+29. gxf5 Bd7 30. Be1 Qc7 31. f6 Bh8 32. Bg3 h6 33. Qg2 Kf8 34. Bh7 Ke8 35. Nf3
+Be6 36. Be4 Kd7 37. Nh4 Nd2 38. Qxd2 Rxb1 39. Qc1 Rdb8 40. Qxb1 Rxb1 41. Rxb1
+Qd8 42. Rf1 Qg8 43. Nf3 Qxg3+ 44. Kh1 Qh3+ 45. Nh2 Bg4 46. Rf2 Qe3 47. Kg2 Qc1
+48. Kg3 Bd1 49. Rg2 Bxf6 50. Rf2 Qe3+ 51. Nf3 Bxf3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Mr-Kakao"]
+[Result "1-0"]
+[WhiteElo "1913"]
+[BlackElo "1914"]
+[TimeControl "60"]
+[EndTime "22:08:52 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nxc6 bxc6 6. Nc3 d6 7. Bg5 e5 8.
+Bd3 Be7 9. O-O Bb7 10. Qf3 O-O 11. Qg3 h6 12. Bxh6 Nh5 13. Qg4 Nf6 14. Qxg7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Aoshi29"]
+[Result "0-1"]
+[WhiteElo "1905"]
+[BlackElo "1910"]
+[TimeControl "60"]
+[EndTime "22:10:58 GMT+0000"]
+[Termination "Aoshi29 won by checkmate"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Qb6 5. Nxc6 bxc6 6. Nc3 g6 7. Bd3 Bg7 8.
+Qd2 e6 9. O-O Ne7 10. Qe3 Qb4 11. a3 Qb8 12. Rb1 Bxc3 13. bxc3 Qxb1 14. Qh6 Qa2
+15. Qg7 Rg8 16. Qf6 d5 17. exd5 Nxd5 18. Qe5 Bd7 19. Be4 Rc8 20. Rd1 a5 21. Bxd5
+cxd5 22. c4 Qxc4 23. Bg5 Qxc2 24. Rf1 Qc3 25. Qd6 Qc5 26. Qf4 f5 27. Qe5 Qc7 28.
+Qf6 Qd8 29. Qxd8+ Rxd8 30. Bxd8 Kxd8 31. Rb1 Ke7 32. Rb8 Rxb8 33. h3 Rb3 34. Kh2
+Rxa3 35. g3 Rc3 36. Kg2 a4 37. h4 a3 38. Kh3 a2 39. Kg2 h5 40. Kh3 a1=Q 41. Kg2
+Qe1 42. Kh2 Qxf2+ 43. Kh3 Qf1+ 44. Kh2 Rc2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "MonsieurPooDoo"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1907"]
+[BlackElo "1897"]
+[TimeControl "60"]
+[EndTime "22:12:59 GMT+0000"]
+[Termination "MonsieurPooDoo won on time"]
+
+1. g3 d5 2. Bg2 c5 3. d3 Nc6 4. Nd2 e5 5. Ngf3 Nf6 6. O-O Bd6 7. Re1 Be6 8. e4
+d4 9. Ng5 O-O 10. Nxe6 fxe6 11. Nf3 Qe7 12. c3 Rf7 13. Qb3 b6 14. Ng5 Re8 15.
+Nxf7 Qxf7 16. Bh3 Na5 17. Qc2 dxc3 18. bxc3 g5 19. Bxg5 Qg6 20. Bxf6 Qxf6 21.
+Bg2 Kf7 22. Qe2 Rg8 23. Qf3 Qxf3 24. Bxf3 Be7 25. Bg2 h5 26. h4 Nc6 27. Bf3 Bxh4
+28. Bxh5+ Kf6 29. Kh2 Bg5 30. Rf1 Rh8 31. g4 Bf4+ 32. Kg2 Kg5 33. f3 Ne7 34. Rh1
+Nc6 35. Bf7 Rf8 36. Bxe6 Rf6 37. Bd5 Ne7 38. Bb3 Kg6 39. Rh3 Kg7 40. Rah1 Kf8
+41. Rh8+ Ng8 42. R1h7 Rg6 43. Rxa7 Bg5 44. Rhh7 Bd8 45. Ra8 Rd6 46. Rh8 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Herr_Winston"]
+[Result "1-0"]
+[WhiteElo "1905"]
+[BlackElo "1886"]
+[TimeControl "60"]
+[EndTime "22:13:33 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. e4 e6 2. d4 d5 3. exd5 exd5 4. c4 c6 5. Nc3 Nf6 6. Nf3 Bb4 7. Bg5 O-O 8. Bxf6
+Qxf6 9. Bd3 Re8+ 10. Be2 Qe7 11. O-O Bxc3 12. Re1 Bxb2 13. Bd3 Qf6 14. Rxe8# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "KAGTrump2020"]
+[Result "1-0"]
+[WhiteElo "1913"]
+[BlackElo "1917"]
+[TimeControl "60"]
+[EndTime "22:15:35 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. d4 d6 2. c4 Nd7 3. Nc3 c6 4. e4 Qc7 5. Nf3 e5 6. d5 Ngf6 7. Bd3 Nc5 8. Bg5
+Nxd3+ 9. Qxd3 Be7 10. Qd2 h6 11. Be3 O-O 12. O-O-O a6 13. h3 b5 14. Bxh6 gxh6
+15. Qxh6 Nh7 16. g4 bxc4 17. g5 Qd8 18. g6 Bg5+ 19. Nxg5 Qxg5+ 20. Qxg5 Nxg5 21.
+Rhg1 Nf3 22. gxf7+ Kxf7 23. Rg3 Nd4 24. dxc6 Ke6 25. Nd5 Rxf2 26. Rg6+ Kf7 27.
+Rxd6 Be6 28. Rxe6 Kxe6 29. Nc7+ Kf6 30. Nxa8 Nxc6 31. Nb6 Nd4 32. Nd5+ Kg5 33.
+Ne3 Kf4 34. Nf1 Kxe4 35. Nd2+ Kd3 36. Nb3+ Ke4 37. Nxd4 exd4 38. h4 d3 39. h5
+Kd4 40. Rd2 Rxd2 41. Kxd2 Ke5 42. h6 Kf6 43. Kc3 Kg6 44. b3 d2 45. Kxd2 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "Icasb"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1932"]
+[BlackElo "1905"]
+[TimeControl "60"]
+[EndTime "22:47:38 GMT+0000"]
+[Termination "Icasb won by checkmate"]
+
+1. d4 d5 2. c4 c6 3. Nc3 e6 4. Nf3 Nf6 5. Bg5 Nbd7 6. e3 Be7 7. c5 O-O 8. h3 h6
+9. Bf4 Nh5 10. Bh2 Nhf6 11. Bd3 b6 12. b4 bxc5 13. bxc5 Qa5 14. Qd2 e5 15. dxe5
+Ne4 16. Nxe4 dxe4 17. Qxa5 Bxc5 18. Bxe4 Rd8 19. Qxd8+ Bf8 20. O-O Nc5 21. Bc2
+Ba6 22. Qxa8 Bxf1 23. Rxf1 Ne6 24. Nd4 Ng5 25. Bb3 Nh7 26. e6 c5 27. e7 g6 28.
+exf8=Q+ Nxf8 29. Bd6 Kg7 30. Qxf8+ Kf6 31. Bxc5 Kg5 32. Qxf7 h5 33. Qf4# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "kms2019"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1876"]
+[BlackElo "1912"]
+[TimeControl "60"]
+[EndTime "23:49:00 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. d4 d5 2. c4 c6 3. e3 e6 4. Nf3 Nf6 5. Be2 Bb4+ 6. Nc3 O-O 7. O-O Nbd7 8. cxd5
+Nxd5 9. Bd2 Bxc3 10. bxc3 Qf6 11. c4 Ne7 12. Rb1 e5 13. dxe5 Nxe5 14. Nxe5 Qxe5
+15. Qc1 Qf6 16. Bc3 Qg6 17. Qd2 Bh3 18. g3 Bxf1 19. Bxf1 Rfd8 20. Qe2 Nf5 21.
+Rd1 Re8 22. Bg2 Nh6 23. Ba1 Ng4 24. Bh3 Nf6 25. Qb2 Qh5 26. Bd7 Qxd1+ 27. Kg2
+Qxd7 28. g4 Qxg4+ 29. Kh1 Qf3+ 30. Kg1 Rad8 31. h4 Rd1+ 32. Kh2 Rh1# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Stonks879"]
+[Result "0-1"]
+[WhiteElo "1904"]
+[BlackElo "1929"]
+[TimeControl "60"]
+[EndTime "1:11:56 GMT+0000"]
+[Termination "Stonks879 won by checkmate"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nxc6 bxc6 6. Nc3 e6 7. Bg5 Be7 8.
+Bd3 d5 9. exd5 cxd5 10. Bxf6 Bxf6 11. O-O O-O 12. Qd2 a5 13. Rfe1 Rb8 14. Rab1
+Qc7 15. Nb5 Qb6 16. a4 Bd7 17. Qe3 Qd8 18. Nd4 Re8 19. Bb5 Bxb5 20. Nxb5 Qd7 21.
+Qc5 Rec8 22. Qd6 Qxd6 23. Nxd6 Rxc2 24. Rec1 Rxc1+ 25. Rxc1 h6 26. g3 Rxb2 27.
+Rc8+ Kh7 28. Nxf7 Kg6 29. Rd8 Kxf7 30. Rc8 Ra2 31. Ra8 Rxa4 32. Ra7+ Kg6 33. Ra6
+e5 34. Kg2 d4 35. f3 Ra1 36. Rd6 a4 37. Kf2 a3 38. Ke2 a2 39. Ra6 Kf5 40. Kd3 g6
+41. g4+ Kf4 42. Ke2 g5 43. Kf2 e4 44. Ke2 exf3+ 45. Kf2 Kxg4 46. h3+ Kxh3 47.
+Kxf3 Rf1+ 48. Ke2 a1=Q 49. Rxa1 Rxa1 50. Kd3 Ra4 51. Ke4 Bg7 52. Kd5 Kh4 53. Ke6
+g4 54. Kf7 g3 55. Kxg7 Kh3 56. Kf8 g2 57. Kf7 Kh2 58. Kg8 d3 59. Kh7 d2 60. Kh8
+d1=Q 61. Kh7 Rc4 62. Kh8 Qb1 63. Kg8 Qb3 64. Kf7 Qa3 65. Ke8 Rb4 66. Kd7 Qa5 67.
+Kc8 Rb5 68. Kd7 Rb6 69. Kc8 Qa7 70. Kd8 Rb8# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "TheLostFromLight"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1896"]
+[BlackElo "1912"]
+[TimeControl "60"]
+[EndTime "1:14:08 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 c6 2. d3 d5 3. Nc3 e6 4. exd5 cxd5 5. Nf3 Nf6 6. Be2 Bb4 7. O-O Nc6 8. Re1
+O-O 9. Bf1 Qe7 10. Bg5 d4 11. a3 dxc3 12. axb4 cxb2 13. Rb1 Nxb4 14. Rxb2 Nbd5
+15. c4 Nc7 16. Qa4 Bd7 17. Qa5 b6 18. Qa1 Nce8 19. Qb1 Qc5 20. Re5 Qc7 21. Rb4
+h6 22. Bh4 a5 23. Rxb6 Nd6 24. Bg3 Nfe8 25. Re1 Qd8 26. c5 Nc8 27. Rb7 Bc6 28.
+Rb2 Qd7 29. Be2 Ne7 30. d4 Nf6 31. Rd1 Ned5 32. Bf1 Ba4 33. Rc1 Bc6 34. Rb6 a4
+35. Rxc6 Qxc6 36. Qa1 a3 37. Re1 a2 38. Rd1 Rfc8 39. Re1 Ra7 40. Rd1 Rca8 41.
+Re1 Ra3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "simedor12"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1966"]
+[BlackElo "1905"]
+[TimeControl "60"]
+[EndTime "1:15:38 GMT+0000"]
+[Termination "simedor12 won by checkmate"]
+
+1. e4 c6 2. Nf3 d5 3. Nc3 dxe4 4. Nxe4 Nf6 5. Qe2 Nbd7 6. d4 Nxe4 7. Qxe4 Nf6 8.
+Qd3 e6 9. c3 Bd6 10. Qc2 O-O 11. Bd3 Qe7 12. O-O e5 13. dxe5 Bxe5 14. Re1 Nd7
+15. Bf4 f6 16. Nxe5 Nxe5 17. Bg3 Re8 18. f4 Qc5+ 19. Bf2 Qd6 20. fxe5 Rxe5 21.
+Rxe5 Qxe5 22. Re1 Qg5 23. Qb3+ Be6 24. Qxe6+ Kh8 25. Qe8+ Rxe8 26. Rxe8# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "igare6a"]
+[Black "JPON24"]
+[Result "1/2-1/2"]
+[WhiteElo "1979"]
+[BlackElo "1907"]
+[TimeControl "30"]
+[EndTime "1:16:56 GMT+0000"]
+[Termination "Game drawn by stalemate"]
+
+1. e3 c6 2. c3 d5 3. Qa4 e6 4. b4 Nf6 5. b5 Bd7 6. bxc6 Bxc6 7. Bb5 Qd7 8. Bxc6
+Qxc6 9. Qxc6+ Nxc6 10. Ba3 Bxa3 11. Nxa3 O-O 12. Ne2 Ne4 13. O-O Nd6 14. Nd4
+Rac8 15. Nxc6 Rxc6 16. Nc2 Rb6 17. Nb4 Rc8 18. Nc2 a5 19. Nd4 Rc4 20. a4 Nf5 21.
+d3 Rxc3 22. Ne2 Rxd3 23. Nc1 Rdb3 24. Nxb3 Rxb3 25. Rfb1 Rb4 26. Rxb4 axb4 27.
+a5 Nd6 28. Rb1 b3 29. Rxb3 g6 30. Rb6 Kg7 31. Rxd6 Kf6 32. Rb6 Ke5 33. Rxb7 Kd6
+34. a6 Kc6 35. a7 Kxb7 36. Kf1 Ka8 37. Ke2 Kxa7 38. Kd3 Kb7 39. Kd4 Kc6 40. f3
+Kd7 41. g3 Kd6 42. h3 f6 43. f4 h5 44. h4 g5 45. fxg5 fxg5 46. hxg5 h4 47. gxh4
+Ke7 48. e4 Kf7 49. exd5 exd5 50. Kxd5 Kg6 51. Ke4 Kh5 52. Kf5 Kxh4 53. g6 Kh3
+54. g7 Kh2 55. g8=Q Kh1 56. Qg5 Kh2 57. Qf4+ Kh1 58. Qg4 Kh2 59. Kf4 Kh1 60.
+Qf3+ Kh2 61. Ke3 Kg1 62. Qg4+ Kh2 63. Kf4 Kh1 64. Qg3 1/2-1/2
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Lopes"]
+[Result "1-0"]
+[WhiteElo "1916"]
+[BlackElo "1935"]
+[TimeControl "30"]
+[EndTime "1:18:07 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 d6 2. Nf3 Nf6 3. d4 Bg4 4. Nc3 Bxf3 5. Qxf3 Nc6 6. Bg5 Nxd4 7. Qd3 Nc6 8.
+Qd1 e5 9. Bxf6 gxf6 10. Bb5 Bh6 11. Qd5 Qd7 12. Bxc6 bxc6 13. Qb3 O-O 14. Ke2
+Qg4+ 15. f3 Qxg2+ 16. Kd3 Kh8 17. Rhg1 Qxf3+ 18. Kc4 d5+ 19. exd5 cxd5+ 20. Nxd5
+Qe4+ 21. Kc3 c6 22. Qc4 cxd5 23. Qxe4 dxe4 24. Raf1 Rac8+ 25. Kb3 Rb8+ 26. Ka3
+Rfc8 27. b3 Rc6 28. Kb2 Rbc8 29. Rf2 Be3 30. Rgg2 Bxf2 31. Rxf2 e3 32. Re2 f5
+33. h3 f4 34. Rg2 f3 35. Re2 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "hafezparast"]
+[Result "0-1"]
+[WhiteElo "1908"]
+[BlackElo "1903"]
+[TimeControl "60"]
+[EndTime "2:22:54 GMT+0000"]
+[Termination "hafezparast won by checkmate"]
+
+1. e4 d5 2. exd5 e6 3. Nc3 Nf6 4. d4 Bd6 5. dxe6 Bxe6 6. Nf3 Nc6 7. Bd3 Qd7 8.
+O-O O-O-O 9. Re1 Nd5 10. Nxd5 Bxd5 11. c4 Bxf3 12. Qxf3 Nxd4 13. Qh5 g6 14. Qg5
+f6 15. Qxf6 Rhf8 16. Qxd4 Bxh2+ 17. Kxh2 Qxd4 18. Be3 Qh4+ 19. Kg1 Rxd3 20. Rad1
+Rxe3 21. Rxe3 Qxf2+ 22. Kh1 Qxe3 23. Rg1 Qh6# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.14"]
+[Round "-"]
+[White "JPON24"]
+[Black "Abriedukas"]
+[Result "0-1"]
+[WhiteElo "1900"]
+[BlackElo "1936"]
+[TimeControl "60"]
+[EndTime "3:38:36 GMT+0000"]
+[Termination "Abriedukas won by checkmate"]
+
+1. e4 e5 2. Nf3 Bc5 3. c3 d6 4. d4 exd4 5. cxd4 Bb6 6. Nc3 Nc6 7. Be3 Bg4 8. Bb5
+a6 9. Ba4 Bd7 10. Bxc6 Bxc6 11. d5 Bxe3 12. fxe3 Bd7 13. Qd4 f6 14. e5 fxe5 15.
+Qd3 Bg4 16. e4 Nf6 17. Rf1 O-O 18. O-O-O b5 19. h3 Bxf3 20. Rxf3 b4 21. Ne2 a5
+22. Rdf1 a4 23. Ng3 b3 24. a3 Rc8 25. Nf5 c5 26. Qc4 Qa5 27. Rg3 g6 28. Nxd6 Nh5
+29. Rg5 Rxf1+ 30. Qxf1 Rf8 31. Qe2 Nf4 32. Qg4 Nd3+ 33. Kb1 Qe1+ 34. Qd1 Qxd1#
+0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.15"]
+[Round "-"]
+[White "qiqajon"]
+[Black "JPON24"]
+[Result "1/2-1/2"]
+[WhiteElo "1912"]
+[BlackElo "1900"]
+[TimeControl "60"]
+[EndTime "5:14:49 GMT+0000"]
+[Termination "Game drawn by repetition"]
+
+1. e4 c6 2. Bc4 d5 3. exd5 cxd5 4. Bb5+ Bd7 5. Bxd7+ Qxd7 6. d4 Nf6 7. Ne2 e6 8.
+c3 Nc6 9. O-O Bd6 10. Bf4 Bxf4 11. Nxf4 Qd6 12. Nd3 O-O 13. Nd2 Rfe8 14. Re1 e5
+15. dxe5 Nxe5 16. Nxe5 Rxe5 17. Rxe5 Qxe5 18. Nf3 Qd6 19. Nd4 Re8 20. f3 Qb6 21.
+Qd2 Nd7 22. b3 Nc5 23. Re1 Rxe1+ 24. Qxe1 g6 25. Qe2 Ne6 26. Qf2 Nxd4 27. Qxd4
+Qxd4+ 28. cxd4 Kg7 29. Kf2 Kf6 30. Ke3 Ke6 31. f4 f5 32. Kd3 a5 33. Kc3 b6 34.
+a4 h6 35. Kd3 g5 36. g3 Kf6 37. Ke3 g4 38. Ke2 h5 39. Kd2 Kg6 40. Kc2 Kf6 41.
+Kb2 h4 42. Ka3 Kg6 43. Kb2 Kh5 44. Kc2 Kg6 45. Kc3 Kf6 46. Kb2 Ke6 47. Ka3 Kd6
+48. Kb2 Kc6 49. Kc3 b5 50. Kc2 bxa4 51. bxa4 Kb6 52. Kd3 Kc6 53. Ke2 Kd6 54. Kf2
+Ke6 55. Kg2 Kf6 56. Kg1 Kg6 57. Kf1 Kh5 58. Kg2 h3+ 59. Kf2 Kg6 60. Ke3 Kf6 61.
+Kd3 Ke6 62. Kd2 Kd6 63. Kc3 Kc6 64. Kc2 Kb6 65. Kb3 Kc7 66. Kb2 Kd7 67. Ka3 Ke7
+68. Ka2 Kf6 69. Kb2 Ke6 70. Kb3 Kd6 71. Kc3 Ke7 72. Kc2 Kf7 73. Kd3 Kg6 74. Kd2
+Kf6 75. Kd3 Ke6 76. Kd2 Kd6 77. Kd3 Kc6 78. Kd2 Kd6 1/2-1/2
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "DystopianMan"]
+[Result "0-1"]
+[WhiteElo "1892"]
+[BlackElo "1913"]
+[TimeControl "60"]
+[EndTime "15:05:10 GMT+0000"]
+[Termination "DystopianMan won by checkmate"]
+
+1. e4 d5 2. exd5 e6 3. Nc3 Nf6 4. d4 exd5 5. Nf3 Be6 6. Bg5 Bd6 7. Bd3 O-O 8.
+O-O Re8 9. Re1 Bg4 10. Be2 c6 11. h3 Bh5 12. Nd2 Bg6 13. Bxf6 Qxf6 14. Nf3 Nd7
+15. Qd2 Bf4 16. Qd1 Rac8 17. g3 Bb8 18. Qd2 Qe6 19. Kg2 Be4 20. Nxe4 dxe4 21.
+Ng5 Qf5 22. Bg4 Qd5 23. Bxd7 e3+ 24. f3 exd2 25. Rxe8+ Rxe8 26. Bxe8 Qxd4 27.
+Bxf7+ Kf8 28. Rd1 h6 29. Ne4 Kxf7 30. Rxd2 Qxb2 31. Rd7+ Kg8 32. Ng5 hxg5 33.
+Rd8+ Kf7 34. Rxb8 Qxc2+ 35. Kf1 b5 36. Ke1 a5 37. Rb7+ Kf6 38. Rd7 Qxa2 39. Rd1
+Qg2 40. Rd3 Qxg3+ 41. Kd2 Qxh3 42. Kc3 Qe6 43. Kd4 Qe5# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "Henryhwsp22"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1903"]
+[BlackElo "1884"]
+[TimeControl "60"]
+[EndTime "16:17:39 GMT+0000"]
+[Termination "Henryhwsp22 won by checkmate"]
+
+1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. d4 e6 5. Nc3 Nf6 6. Be3 Nc6 7. a3 Bd6 8. Bd3
+O-O 9. h3 Re8 10. g4 e5 11. dxe5 Nxe5 12. Nxe5 Bxe5 13. g5 Nd7 14. Qd2 d4 15.
+O-O-O dxe3 16. fxe3 Bxc3 17. Qxc3 Ne5 18. Bxh7+ Kxh7 19. Rxd8 Rxd8 20. h4 Nc6
+21. h5 Be6 22. h6 Kg8 23. Qxg7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "katplasma"]
+[Result "1-0"]
+[WhiteElo "1892"]
+[BlackElo "1889"]
+[TimeControl "60"]
+[EndTime "18:40:55 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 e5 5. Nxc6 bxc6 6. Nc3 h6 7. Be3 Nf6 8.
+Bc4 Bb4 9. O-O O-O 10. f4 d6 11. fxe5 dxe5 12. Qf3 Be6 13. Bxe6 fxe6 14. Qg3
+Bxc3 15. bxc3 Nh5 16. Qg4 Nf4 17. Bxf4 exf4 18. Rxf4 Qb6+ 19. Kh1 Rxf4 20. Qxf4
+Rf8 21. Qe5 Qf2 22. Qxe6+ Kh8 23. Qc4 c5 24. Rg1 Qxc2 25. Qxc5 Rf2 26. Qxa7 Qxe4
+27. Qxf2 Qa4 28. Qf8+ Kh7 29. Qf5+ Kg8 30. Qb1 Qc4 31. Rc1 Qe2 32. Qb3+ Kh7 33.
+Qc2+ Qe4 34. Qxe4+ Kg8 35. Qe8+ Kh7 36. Rd1 h5 37. Qe4+ Kh6 38. Rd6+ g6 39.
+Qxg6# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "MrZiemniak07"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1895"]
+[BlackElo "1900"]
+[TimeControl "60"]
+[EndTime "18:48:17 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. d4 c6 2. c4 d5 3. Nc3 e6 4. Bf4 Nf6 5. e3 Bd6 6. Bg3 dxc4 7. Bxc4 Qe7 8. Bb3
+O-O 9. Nge2 Nbd7 10. Nf4 Re8 11. Nd3 Nf8 12. Ne5 Nd5 13. Qd3 Bxe5 14. Bxe5 Nxc3
+15. bxc3 a5 16. Bc2 Bd7 17. h4 f6 18. Bg3 b5 19. h5 e5 20. O-O e4 21. Qe2 f5 22.
+h6 g6 23. Be5 Be6 24. Bb3 Bd5 25. Bxd5+ cxd5 26. Qxb5 Qd7 27. Qxd7 Nxd7 28. Bg3
+Rac8 29. Rfc1 Rc4 30. Rab1 Rec8 31. Rb5 Rxc3 32. Rxc3 Rxc3 33. Rxd5 Rc1+ 34. Kh2
+Nf6 35. Rxa5 Rf1 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "shotgunboy"]
+[Result "1-0"]
+[WhiteElo "1908"]
+[BlackElo "1877"]
+[TimeControl "60"]
+[EndTime "2:40:42 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 d6 2. Nf3 Nd7 3. Nc3 g6 4. d3 Bg7 5. Bd2 f6 6. Qc1 e5 7. Be2 Ne7 8. O-O f5
+9. exf5 Nxf5 10. Bh6 Nxh6 11. Ng5 Nf6 12. h3 O-O 13. Qe3 Nf5 14. Qf3 Nh4 15. Qe3
+Bh6 16. f4 exf4 17. Rxf4 Nf5 18. Qf2 Nh5 19. h4 Nxf4 20. Qxf4 c6 21. Qc4+ d5 22.
+Qf4 Qb6+ 23. Kh1 Ne3 24. Qe5 Bxg5 25. hxg5 Rf5 26. Qe8+ Rf8 27. Qe5 Nf5 28. Bg4
+Bd7 29. Bxf5 Bxf5 30. Re1 Rae8 31. Qg3 Rxe1+ 32. Qxe1 Qd4 33. Qg3 b5 34. Ne2
+Qxb2 35. Nf4 Qxc2 36. Kh2 Qd1 37. Nh3 Qg4 38. Qf2 Bd7 39. Qg1 Rf5 40. Qe1 Rf8
+41. Qg3 Qxg3+ 42. Kxg3 Bf5 43. Kh2 Bxd3 44. Nf4 Bc4 45. Nh3 Bxa2 46. g4 a5 47.
+Kg3 a4 48. Kh4 a3 49. Nf2 Bb3 50. Nh3 a2 51. Nf4 a1=Q 52. Nh3 Qe5 53. Nf2 Rf4
+54. Nh3 Qd4 55. Nf2 Rxg4+ 56. Nxg4 Qf4 57. Kh3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "peter-fathy"]
+[Result "1-0"]
+[WhiteElo "1918"]
+[BlackElo "1969"]
+[TimeControl "60"]
+[EndTime "2:42:51 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. d4 e6 2. c4 d5 3. Nc3 c6 4. Nf3 Nf6 5. e3 Bb4 6. Bd2 Bxc3 7. Bxc3 Ne4 8. Qc2
+f5 9. Bd3 O-O 10. O-O Nd7 11. cxd5 exd5 12. Rac1 Ndf6 13. Bb4 Re8 14. a4 a5 15.
+Ba3 Be6 16. Bxe4 fxe4 17. Ne5 Nd7 18. Bd6 Bf5 19. Nxd7 Qxd7 20. Be5 Re6 21. Qc5
+Rg6 22. Bg3 h5 23. h4 Rf8 24. b4 axb4 25. Qxb4 Kh7 26. Qxf8 Rf6 27. Qc5 Bg4 28.
+Rb1 Rg6 29. Rb6 Be2 30. Qd6 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "macusisnothere"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1923"]
+[BlackElo "1926"]
+[TimeControl "60"]
+[EndTime "2:44:45 GMT+0000"]
+[Termination "JPON24 won on time"]
+
+1. e4 c6 2. Nf3 d5 3. exd5 cxd5 4. d4 e6 5. c4 Nf6 6. Nc3 Nc6 7. Be2 Bb4 8. O-O
+O-O 9. c5 Qe7 10. a3 Ba5 11. b4 Bc7 12. Na4 Bd7 13. b5 Na5 14. Bd2 Qe8 15. b6
+axb6 16. Nxb6 Bxb6 17. cxb6 Bb5 18. Bxa5 Bxe2 19. Qxe2 Rxa5 20. Qb2 Rb5 21. Qc3
+Rxb6 22. a4 Ne4 23. Qc2 Rc6 24. Qb2 Qd7 25. Rfb1 Rb8 26. a5 Qc7 27. a6 b6 28. a7
+Ra8 29. Qb5 Nc3 30. Qa6 Nxb1 31. Rxb1 Rc1+ 32. Ne1 Rxb1 33. g3 Rxe1+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "jasachess"]
+[Black "JPON24"]
+[Result "1-0"]
+[WhiteElo "1948"]
+[BlackElo "1918"]
+[TimeControl "60"]
+[EndTime "2:46:31 GMT+0000"]
+[Termination "jasachess won by checkmate"]
+
+1. d4 d5 2. Bf4 e6 3. e3 c6 4. Qf3 Bd6 5. Qg3 Bxf4 6. Qxg7 Qf6 7. Qxf6 Nxf6 8.
+exf4 Nbd7 9. c3 Rg8 10. g3 c5 11. Nf3 cxd4 12. Nxd4 Nc5 13. Bg2 Bd7 14. O-O Nce4
+15. Bxe4 Nxe4 16. f3 Nf6 17. Nd2 h5 18. Rfe1 h4 19. g4 e5 20. fxe5 Nxg4 21. fxg4
+Rxg4+ 22. Kf2 O-O-O 23. Rg1 Rf4+ 24. Ke3 Re4+ 25. Nxe4 dxe4 26. Kxe4 Bc6+ 27.
+Nxc6 bxc6 28. Rad1 Re8 29. Rd6 Re6 30. Rxe6 fxe6 31. Rg7 a5 32. Kd4 Kb8 33. Kc5
+a4 34. Kb6 a3 35. Rg8# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "SoupCaRyy"]
+[Black "JPON24"]
+[Result "0-1"]
+[WhiteElo "1918"]
+[BlackElo "1926"]
+[TimeControl "60"]
+[EndTime "2:48:18 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. d4 c6 2. Nf3 d5 3. Bf4 e6 4. e3 Bd6 5. c4 Bxf4 6. exf4 Nf6 7. c5 Nbd7 8. Bd3
+O-O 9. Nc3 Re8 10. Qc2 Nf8 11. O-O-O b6 12. h3 bxc5 13. dxc5 Qa5 14. g4 Rb8 15.
+g5 Ne4 16. Nxe4 dxe4 17. Bxe4 Rb5 18. Kb1 Rxc5 19. Qd3 Ba6 20. g6 Bxd3+ 21. Bxd3
+Nxg6 22. f5 exf5 23. Bxf5 Rxf5 24. Nd4 Rxf2 25. Nxc6 Qf5+ 26. Ka1 Qc2 27. Rb1
+Qxc6 28. Rhc1 Rc2 29. Rd1 Rb8 30. h4 Nf8 31. h5 Qe4 32. h6 Qe2 33. hxg7 Kxg7 34.
+Rg1+ Ng6 35. Rge1 Qd2 36. Red1 Qb4 37. Rd4 Qxd4 38. a3 Rcxb2 39. Rd1 Rb1+ 40.
+Ka2 Qb2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "YaHuyy1409"]
+[Result "1-0"]
+[WhiteElo "1934"]
+[BlackElo "1925"]
+[TimeControl "60"]
+[EndTime "2:49:19 GMT+0000"]
+[Termination "JPON24 won by checkmate"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 Nbd7 7. f3 e5 8. Nde2
+h6 9. Bxf6 Nxf6 10. Nd5 Nxd5 11. Qxd5 Be7 12. Nc3 Be6 13. Qd2 O-O 14. Bd3 Rc8
+15. O-O-O Qc7 16. Kb1 b6 17. g4 b5 18. h4 b4 19. Nd5 Bxd5 20. exd5 a5 21. g5
+hxg5 22. hxg5 g6 23. Qh2 f5 24. Qh7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2025.06.16"]
+[Round "-"]
+[White "JPON24"]
+[Black "Jglliebana"]
+[Result "1-0"]
+[WhiteElo "1942"]
+[BlackElo "1923"]
+[TimeControl "60"]
+[EndTime "2:51:37 GMT+0000"]
+[Termination "JPON24 won by resignation"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 d6 5. Bb5 Bd7 6. Bxc6 Bxc6 7. Nxc6 bxc6
+8. Nc3 e5 9. O-O Ne7 10. Bg5 Qd7 11. Qd3 Ng6 12. Rad1 d5 13. exd5 c5 14. Rfe1
+Bd6 15. Ne4 O-O 16. Nxd6 Qxd6 17. c4 f6 18. Bd2 Rae8 19. Qf5 Re7 20. a3 Rfe8 21.
+b4 cxb4 22. Bxb4 Qa6 23. Bxe7 Nxe7 24. Qe6+ Kf8 25. Qxa6 Nf5 26. Qa4 Nd4 27.
+Qb4+ Kg8 28. Rxd4 Rb8 29. Qxb8+ Kf7 30. Qc7+ 1-0

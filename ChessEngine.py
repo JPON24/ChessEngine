@@ -1,6 +1,8 @@
 import numpy as np
 import pygame
 from BoardData import *
+import math
+import copy
 
 # pygame setup
 pygame.init()
@@ -135,10 +137,10 @@ def selectSquare(x,y):
                 return j,i
     return -1, -1
 
-def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
+def calculatePossibleMoves(boardList, x, y, color):
     position = boardList[y][x]
     piece = position.typeOfPiece
-    color = position.color
+    # color = position.color
     validMoves = []
 
     if piece == 'p':
@@ -155,26 +157,26 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
             positions.append((x,y+1))
             if x+1 <= 7 and y+1 <= 7:
                 if boardList[y+1][x+1].color == 'b':
-                    validMoves.append((x+1, y+1))
+                    validMoves.append(move(x, y, x+1, y+1))
             if x-1 >= 0 and y+1 <= 7:
                 if boardList[y+1][x-1].color == 'b':
-                    validMoves.append((x-1, y+1))
+                    validMoves.append(move(x, y, x-1, y+1))
 
         elif color == 'w':
             positions.append((x,y-1))
             if x+1 <= 7 and y-1 >= 0:
                 if boardList[y-1][x+1].color == 'b':
-                    validMoves.append((x+1, y-1))
+                    validMoves.append(move(x, y, x+1, y-1))
             if x-1 >= 0 and y-1 >= 0:
                 if boardList[y-1][x-1].color == 'b':
-                    validMoves.append((x-1, y-1))
+                    validMoves.append(move(x,y,x-1, y-1))
 
         for i in positions:
             if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
                 continue
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 continue
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
     
     if piece == 'n':
         positions = []
@@ -194,9 +196,9 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
                 continue
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 if boardList[i[1]][i[0]].color != color:
-                    validMoves.append(i)
+                    validMoves.append(move(x, y, i[0], i[1]))
                 continue 
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
 
     if piece == 'k':
         positions = []
@@ -216,26 +218,28 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
                 continue
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 if boardList[i[1]][i[0]].color != color:
-                    validMoves.append(i)
+                    validMoves.append(move(x, y, i[0], i[1]))
                 continue 
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
 
-        if not kingHasMoved:
-            if tgtX == 0 and tgtY == 7:
-                for i in range(1,4):
-                    if boardList[y][x-i].typeOfPiece != '-':
-                        break
-                if boardList[7][0].typeOfPiece == 'r':
-                    move(x,y,x-2,y, piece,color)
-                    move(0,7,x-1,y, 'r',color)
-            elif tgtX == 7 and tgtY == 7:
-                for i in range(1,3):
-                    if boardList[y][x+i].typeOfPiece != '-':
-                        break
-                if boardList[7][7].typeOfPiece == 'r':
-                    kingHasMoved = True
-                    move(x,y,x+2,y, piece,color)
-                    move(7,7,x+1,y, 'r',color)
+        # if not kingHasMoved:
+        #     if tgtX == 0 and tgtY == 7:
+        #         for i in range(1,4):
+        #             if boardList[y][x-i].typeOfPiece != '-':
+        #                 break
+        #         if boardList[7][0].typeOfPiece == 'r':
+        #             movePiece(boardList,x,y,x-2,y, piece,color)
+        #             movePiece(boardList,0,7,x-1,y, 'r',color)
+        #     elif tgtX == 7 and tgtY == 7:
+        #         for i in range(1,3):
+        #             if boardList[y][x+i].typeOfPiece != '-':
+        #                 break
+        #         if boardList[7][7].typeOfPiece == 'r':
+        #             movePiece(boardList,x,y,x+2,y, piece,color)
+        #             movePiece(boardList,7,7,x+1,y, 'r',color)
+        #             global playerTurn
+
+        #             playerTurn = not playerTurn
 
     if piece == 'r':
         positions = []
@@ -279,7 +283,7 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
         for i in positions:
             if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
                 continue
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
 
     if piece == 'b':
         positions = []
@@ -323,7 +327,7 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
         for i in positions:
             if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
                 continue
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
 
     if piece == 'q':
         positions = []
@@ -403,20 +407,100 @@ def calculatePossibleMoves(x, y, tgtX ,tgtY, color, kingHasMoved):
         for i in positions:
             if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
                 continue
-            validMoves.append(i)
+            validMoves.append(move(x, y, i[0], i[1]))
+    
+    return validMoves
 
-    if (tgtX, tgtY) in validMoves:
-        move(x,y,tgtX,tgtY, piece,color)
+def movePiece(board,x,y,tgtX,tgtY,piece,color):
+    global playerTurn,kingHasMoved
+    
+    if piece == 'k':
+        kingHasMoved = True
 
-def move(x,y,tgtX,tgtY,piece,color):
-    global playerTurn
-    boardList[y][x].typeOfPiece = '-'
-    boardList[y][x].color = '-'
+    board[y][x].typeOfPiece = '-'
+    board[y][x].color = '-'
 
-    boardList[tgtY][tgtX].typeOfPiece = piece
-    boardList[tgtY][tgtX].color = color
+    board[tgtY][tgtX].typeOfPiece = piece
+    board[tgtY][tgtX].color = color
 
     playerTurn = not playerTurn
+
+def getLegalMoves(board, white):
+    legalMoves = []
+    color = ''
+    
+    if white:
+        color == 'w'
+    else:
+        color = 'b'
+    
+    count = 0
+    for r in range(8):
+        for c in range(8):
+            if board[c][r].color == 'w':
+                count += 1
+            # legalMoves.extend(calculatePossibleMoves(board, r, c, color))
+    print(count)
+    return legalMoves
+
+def checkGameOver(board, white):
+    if len(getLegalMoves(board,white)) == 0:
+        return True
+    return False
+
+def evaluate(board):
+    whiteScore = 0
+    blackScore = 0
+
+    for i in range(8):
+        for j in range(8):
+            color = board[i][j].color
+            if (color == 'w'):
+                whiteScore += material[board[i][j].typeOfPiece]
+            elif (color == 'b'):
+                blackScore += material[board[i][j].typeOfPiece]
+
+    score = whiteScore - blackScore
+
+    return score
+
+def minimax(board, depth, alpha, beta, white):
+    if checkGameOver(board, white) or depth == 0:
+        return evaluate(board)
+
+    if white:
+        maxEval = -math.inf
+        possibleMoves = getLegalMoves(board, white)
+
+        print(len(possibleMoves))
+
+        # for i in possibleMoves:
+        #     print(f'x : {i.x}, y : {i.y}, tgtX : {i.tgtX}, tgtY : {i.tgtY}')
+
+        for move in possibleMoves:
+            copiedBoard = copy.deepcopy(board)
+            movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'w')
+            eval = minimax(copiedBoard, depth-1, alpha, beta, False)
+            maxEval = max(maxEval, eval)
+            if beta <= alpha:
+                break
+
+        return maxEval
+    else:
+        minEval = math.inf
+        possibleMoves = getLegalMoves(board, white)
+
+        for move in possibleMoves:
+            copiedBoard = copy.deepcopy(board)
+            movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'b')
+            eval = minimax(copiedBoard, depth-1, alpha, beta, True)
+            minEval = min(minEval, eval)
+            if beta <= alpha:
+                break
+            
+        return minEval
+
+material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':0, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
@@ -429,9 +513,6 @@ turnNumber = 0
 
 kingHasMoved = False
 
-def chooseMove(iter):
-    pass
-
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -439,29 +520,50 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    # print(evaluate(boardList))
+
     if (playerTurn):
-        mouse_x, mouse_y = pygame.mouse.get_pos()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            
+            eval = minimax(boardList, 1, -math.inf, math.inf, True)
+            mouse_x, mouse_y = pygame.mouse.get_pos()
             selectedX, selectedY = selectSquare(mouse_x,mouse_y)
 
             if boardList[selectedY][selectedX].typeOfPiece != '-' and boardList[selectedY][selectedX].color == 'w':
-                if (boardList[selectedY][selectedX].typeOfPiece == 'r' and not kingHasMoved and boardList[selectedPieceY][selectedPieceX].typeOfPiece == 'k'):
-                    calculatePossibleMoves(selectedPieceX, selectedPieceY, selectedX, selectedY, 'w', kingHasMoved)
-                    continue
-                selectedPieceX, selectedPieceY = selectSquare(mouse_x,mouse_y)
+                selectedPieceX, selectedPieceY = selectSquare(mouse_x,mouse_y)        
+                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY, 'w')
+
+                for i in validMoves:
+                    print(f'x : {i.x}, y : {i.y}, tgtX : {i.tgtX}, tgtY : {i.tgtY}')            
             else:
-                calculatePossibleMoves(selectedPieceX, selectedPieceY, selectedX, selectedY, 'w', kingHasMoved)
+                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY, 'w')
+
+                # for i in validMoves:
+                #     print(f'x : {i.x}, y : {i.y}, tgtX : {i.tgtX}, tgtY : {i.tgtY}')
+                # print(f'selx : {selectedPieceX}, sely : {selectedPieceY}, seltgtX : {selectedX}, seltgtY : {selectedY}')
+                
+                unpacked = []
+                for i in validMoves:
+                    unpacked.append(i.unpack())
+
+                if (selectedPieceX,selectedPieceY,selectedX,selectedY) in unpacked:
+                    movePiece(boardList,selectedPieceX,selectedPieceY,
+                                selectedX,selectedY,boardList[selectedPieceY][selectedPieceX].typeOfPiece,'w')
     else:
         selectedPieceX = -1
         selectedPieceY = -1
         selectedX = -1
         selectedY = -1
 
-        x,y,tgtX,tgtY,piece = chooseMove()
-
-        move(x,y,tgtX,tgtY,piece,'b')
+        if (turnNumber > 7):
+            movePiece(boardList,turnNumber-8,2,
+                                turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
+        else:
+            movePiece(boardList,turnNumber-8,1,
+                                turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
         
+        # minimax(boardList, 5, -math.inf, math.inf, False)
         turnNumber += 1
 
     rendering() 
