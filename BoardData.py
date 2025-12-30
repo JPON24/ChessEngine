@@ -16,7 +16,7 @@ class square:
         self.typeOfPiece = typeOfPiece
         self.color = color
 
-class move:
+class Move:
     x = 0
     y = 0
     tgtX = 0
@@ -30,3 +30,11 @@ class move:
 
     def unpack(self):
         return self.x,self.y,self.tgtX,self.tgtY
+    
+class evalObj:
+    eval = 0
+    move = ''
+
+    def __init__(self, eval, moveStats):
+        self.eval = eval
+        self.move = moveStats
