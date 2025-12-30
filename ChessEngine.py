@@ -148,13 +148,13 @@ def calculatePossibleMoves(boardList, x, y):
         positions = []
 
         if y == 1 and color == 'b':
-            positions.append((x,y+1))
+            # positions.append((x,y+1))
             positions.append((x,y+2))
         elif y == 6 and color == 'w':
-            positions.append((x,y-1))
+            # positions.append((x,y-1))
             positions.append((x,y-2))
             
-        elif color == 'b':
+        if color == 'b':
             positions.append((x,y+1))
             if x+1 <= 7 and y+1 <= 7:
                 if boardList[y+1][x+1].color == 'b':
@@ -445,6 +445,9 @@ def evaluate(board):
     whiteScore = 0
     blackScore = 0
 
+    whiteKingMoves = 0 
+    blackKingMoves = 0
+
     for i in range(8):
         for j in range(8):
             color = board[i][j].color
@@ -453,7 +456,22 @@ def evaluate(board):
             elif (color == 'b'):
                 blackScore += material[board[i][j].typeOfPiece]
 
-    score = whiteScore - blackScore
+            if board[i][j].typeOfPiece == 'k':
+                if color == 'w':
+                    whiteKingMoves = len(calculatePossibleMoves(board, i, j))
+                elif color == 'b':
+                    blackKingMoves = len(calculatePossibleMoves(board, i, j))
+
+    whiteLegal = getLegalMoves(board, 'w')
+    blackLegal = getLegalMoves(board, 'b')
+
+    materialEval = whiteScore - blackScore
+
+    positional = (len(whiteLegal) - len(blackLegal)) * 0.1    
+
+    kingSafety = ((8-whiteKingMoves) - (8-blackKingMoves)) * 0.01
+
+    score = materialEval + positional + kingSafety
 
     return score
 
@@ -470,6 +488,7 @@ def minimax(board, depth, alpha, beta, color):
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'w')
             eval,_ = minimax(copiedBoard, depth-1, alpha, beta, 'b')
+            alpha = max(alpha, eval)
 
             if (eval > maxEval):
                 maxEval = eval
@@ -488,7 +507,8 @@ def minimax(board, depth, alpha, beta, color):
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'b')
             eval, _ = minimax(copiedBoard, depth-1, alpha, beta, 'w')
-            
+            beta = min(beta, eval)
+
             if (eval < minEval):
                 minEval = eval
                 bestMove = move
@@ -498,7 +518,7 @@ def minimax(board, depth, alpha, beta, color):
             
         return minEval, bestMove
 
-material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':0, '-':0}
+material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':100, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
