@@ -125,13 +125,6 @@ def rendering():
 
     clock.tick(60)  # limits FPS to 60
 
-def drawPawn(x,y,color):
-    pawnSize = pieceW * 2 / 3
-    if color == 'b':
-        pygame.draw.rect(screen,pieceDark, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
-    elif color == 'w':
-        pygame.draw.rect(screen,pieceLight, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
-
 def drawPawnImg(x,y,color):
     if color == 'w':
         screen.blit(pawn_white_scaled, (x,y))
@@ -139,24 +132,11 @@ def drawPawnImg(x,y,color):
         pass
         screen.blit(pawn_black_scaled, (x,y))
 
-def drawRook(x,y,color):
-    if color == 'b':
-        pygame.draw.rect(screen,pieceDark, (x + pieceW//4, y+5, pieceW,65))
-    elif color == 'w':
-        pygame.draw.rect(screen,pieceLight, (x + pieceW//4, y+5, pieceW,65))
-
 def drawRookImg(x,y,color):
     if color == 'w':
         screen.blit(rook_white_scaled, (x,y))
     elif color == 'b':
         screen.blit(rook_black_scaled, (x,y))
-
-def drawBishop(x,y,color):
-    points = [(x+38,y+38+pieceH/2),(x+38+pieceW/2,y+38),(x+38-pieceW/2,y+38),(x+38,y+38-pieceH/2)]
-    if color == 'b':
-        pygame.draw.polygon(screen,pieceDark,points)
-    elif color == 'w':
-        pygame.draw.polygon(screen,pieceLight,points)
 
 def drawBishopImg(x,y,color):
     if color == 'w':
@@ -164,39 +144,17 @@ def drawBishopImg(x,y,color):
     elif color == 'b':
         screen.blit(bishop_black_scaled, (x,y))
 
-def drawQueen(x,y,color):
-    if color == 'b':
-        pygame.draw.circle(screen,pieceDark, (x+75//2, y+75//2),pieceW/2)
-    elif color == 'w':
-        pygame.draw.circle(screen,pieceLight, (x+75//2, y+75//2),pieceW/2)
-
 def drawQueenImg(x,y,color):
     if color == 'w':
         screen.blit(queen_white_scaled, (x,y))
     elif color == 'b':
         screen.blit(queen_black_scaled, (x,y))
 
-def drawKing(x,y,color):
-    pawnSize = pieceW * 3 / 4
-    if color == 'b':
-        pygame.draw.rect(screen,pieceDark, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
-        pygame.draw.circle(screen,pieceDark, (x+75//2, y+75//2),pieceW*5.25/12)
-    elif color == 'w':
-        pygame.draw.rect(screen,pieceLight, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
-        pygame.draw.circle(screen,pieceLight, (x+75//2, y+75//2),pieceW*5.25/12)
-
 def drawKingImg(x,y,color):
     if color == 'w':
         screen.blit(king_white_scaled, (x,y))
     elif color == 'b':
         screen.blit(king_black_scaled, (x,y))
-
-def drawKnight(x,y,color):
-    knightSize = pieceW * 2 / 3
-    if color == 'b':
-        pygame.draw.ellipse(screen,pieceDark, (x + 13, y + 22, pieceW,knightSize))
-    elif color == 'w':
-        pygame.draw.ellipse(screen,pieceLight, (x + 13, y + 22, pieceW,knightSize))
 
 def drawKnightImg(x,y,color):
     if color == 'w':
@@ -295,6 +253,17 @@ def calculatePossibleMoves(boardList, x, y):
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 if boardList[i[1]][i[0]].color != color:
                     validMoves.append(Move(x, y, i[0], i[1]))
+                if boardList[i[1]][i[0]].typeOfPiece == 'r':
+                    if color == 'b':
+                        if boardList[0][3] == '-' and boardList[0][2] == '-' and boardList[0][1] == '-':    
+                            validMoves.append(Move(x,y,0,0))
+                        if boardList[0][5] == '-' and boardList[0][6] == '-':    
+                            validMoves.append(Move(x,y,7,0))
+                    elif color == 'w':
+                        if boardList[7][3] == '-' and boardList[7][2] == '-' and boardList[7][1] == '-':    
+                            validMoves.append(Move(x,y,0,7))
+                        if boardList[7][5] == '-' and boardList[7][6] == '-':    
+                            validMoves.append(Move(x,y,7,7))
                 continue 
             validMoves.append(Move(x, y, i[0], i[1]))
 
@@ -488,10 +457,36 @@ def calculatePossibleMoves(boardList, x, y):
     return validMoves
 
 def movePiece(board,x,y,tgtX,tgtY,piece,color):
-    global playerTurn,kingHasMoved
+    global playerTurn
     
-    if piece == 'k':
-        kingHasMoved = True
+    if board[y][x].typeOfPiece == 'k':
+        if (y == 7 or y == 0) and x == 4:
+            if (board[tgtY][tgtX].typeOfPiece == 'r'):
+                if tgtX == 0: # queenside
+                    board[y][4].typeOfPiece = '-'
+                    board[y][4].color = '-'
+                    
+                    board[y][2].typeOfPiece = 'k'
+                    board[y][2].color = color
+
+                    board[y][0].typeOfPiece = '-'
+                    board[y][0].color = '-'
+
+                    board[y][3].typeOfPiece = 'r'
+                    board[y][3].color = color
+                elif tgtX == 7: # kingside
+                    board[y][x].typeOfPiece = '-'
+                    board[y][x].color = '-'
+                    
+                    board[y][6].typeOfPiece = 'k'
+                    board[y][6].color = color
+
+                    board[y][7].typeOfPiece = '-'
+                    board[y][7].color = '-'
+                    
+                    board[y][5].typeOfPiece = 'r'
+                    board[y][5].color = color
+            return
 
     board[y][x].typeOfPiece = '-'
     board[y][x].color = '-'
@@ -630,6 +625,9 @@ while running:
             selectedX, selectedY = selectSquare(mouse_x,mouse_y)
 
             if boardList[selectedY][selectedX].typeOfPiece != '-' and boardList[selectedY][selectedX].color == 'w':
+                if (boardList[selectedY][selectedX].typeOfPiece == 'r' and not kingHasMoved and boardList[selectedPieceY][selectedPieceX].typeOfPiece == 'k'):
+                    movePiece(boardList,selectedPieceX,selectedPieceY,
+                                selectedX,selectedY,boardList[selectedPieceY][selectedPieceX].typeOfPiece,'w')
                 selectedPieceX, selectedPieceY = selectSquare(mouse_x,mouse_y)        
                 validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)        
             else:
@@ -652,10 +650,12 @@ while running:
         #     movePiece(boardList,turnNumber-8,2,
         #                         turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
         # else:
-            # movePiece(boardList,turnNumber-8,1,
-            #                     turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
+        #     movePiece(boardList,turnNumber-8,1,
+        #                         turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
         
-        eval, move = minimax(boardList, 3, -math.inf, math.inf, 'b')
+        # castling breaks when the engine is enabled?
+
+        eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
 
         movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
                   boardList[move.y][move.x].typeOfPiece, 'b')
