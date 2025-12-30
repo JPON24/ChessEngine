@@ -520,6 +520,20 @@ def checkGameOver(board, color):
 
     return False
 
+def getMaterial(board):
+    whiteScore = 0
+    blackScore = 0
+
+    for i in range(8):
+        for j in range(8):
+            color = board[i][j].color
+            if (color == 'w'):
+                whiteScore += material[board[i][j].typeOfPiece]
+            elif (color == 'b'):
+                blackScore += material[board[i][j].typeOfPiece]
+    
+    return whiteScore - blackScore
+
 def evaluate(board):
     whiteScore = 0
     blackScore = 0
@@ -609,6 +623,102 @@ playerTurn = True
 turnNumber = 0
 
 kingHasMoved = False
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import PGNReader as pgn
+
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+
+def inference(board, color):
+    possibleMoves = getLegalMoves(board, color)
+    
+    for move in possibleMoves:
+
+
+def train(model, gamesToAnalyze):
+    for i in range(min(len(pgn.gameList), gamesToAnalyze)):
+        x_train, y_train = analyzeGame(i)
+        trainGame(model, x_train, y_train)
+
+gamesTrained = 0
+
+def trainGame(model, x_train, y_train):
+    global gamesTrained
+    gamesTrained += 1
+    print(gamesTrained)
+    # print(x_train.shape)
+    # print(y_train.shape)
+    model.fit(x_train, y_train)
+
+def analyzeGame(index):
+    pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
+    
+    boardList = init()
+    moves = pgn.getGame(index)
+    isWhite = 1
+    color = 'w'
+
+    x_train = []
+    y_train = []
+
+    for move in moves:
+        if isWhite%2 == 1:
+            color = 'w'
+        else:
+            color = 'b'
+
+        possibleMoves = getLegalMoves(boardList, color)
+        
+        xOut = []
+        yOut = []
+
+        pieces = []
+        for i in possibleMoves:
+            pieces.append(boardList[i.y][i.x].typeOfPiece) 
+
+        pdMoves = pd.DataFrame(pieces)
+        piecesConverted = pieceOrdinal.fit_transform(pdMoves)
+
+        for i, pos in enumerate(possibleMoves):
+            x = pd.DataFrame({
+                "isWhite": isWhite % 2,
+                "material": getMaterial(boardList),
+                "x" : pos.x,
+                "y" : pos.y,
+                "tgtX" : pos.tgtX,
+                "tgtY" : pos.tgtY,
+                "piece" :  piecesConverted[i]
+            })
+
+            y = 0
+
+            if (move.x == pos.x and move.y == pos.y and 
+            move.tgtX == pos.tgtX and move.tgtY == pos.tgtY):
+                y = 1
+            
+            xOut.append(x)
+            yOut.append(y)
+
+        movePiece(boardList,move.x,move.y,move.tgtX,move.tgtY,boardList[move.y][move.x].typeOfPiece,color)
+        isWhite += 1
+
+        x_train.extend(xOut)
+        y_train.extend(yOut)
+    
+    np_x = np.array(x_train)
+
+    np_x = np_x.reshape(np_x.shape[0], -1)
+    
+    np_y = np.array(y_train)
+    return np_x, np_y
+    
+gamesToAnalyze = 1000
+train(model, gamesToAnalyze)
 
 while running:
     # poll for events
