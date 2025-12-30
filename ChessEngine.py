@@ -24,7 +24,44 @@ boardList = []
 
 pieceW = 50
 pieceH = 50 
+
+#images
+king_white = pygame.image.load('Images/white_king.png').convert_alpha()
+king_white_scaled = pygame.transform.scale(king_white, (75, 75))
+
+king_black = pygame.image.load('Images/black_king.png').convert_alpha()
+king_black_scaled = pygame.transform.scale(king_black, (75, 75))
+
+pawn_white = pygame.image.load('Images/white_pawn.png').convert_alpha()
+pawn_white_scaled = pygame.transform.scale(pawn_white, (75, 75))
+
+pawn_black = pygame.image.load('Images/black_pawn.png').convert_alpha()
+pawn_black_scaled = pygame.transform.scale(pawn_black, (75, 75))
+
+bishop_white = pygame.image.load('Images/white_bishop.png').convert_alpha()
+bishop_white_scaled = pygame.transform.scale(bishop_white, (75, 75))
+
+bishop_black = pygame.image.load('Images/black_bishop.png').convert_alpha()
+bishop_black_scaled = pygame.transform.scale(bishop_black, (75, 75))
     
+queen_white = pygame.image.load('Images/white_queen.png').convert_alpha()
+queen_white_scaled = pygame.transform.scale(queen_white, (75, 75))
+
+queen_black = pygame.image.load('Images/black_queen.png').convert_alpha()
+queen_black_scaled = pygame.transform.scale(queen_black, (75, 75))
+
+rook_white = pygame.image.load('Images/white_rook.png').convert_alpha()
+rook_white_scaled = pygame.transform.scale(rook_white, (75, 75))
+
+rook_black = pygame.image.load('Images/black_rook.png').convert_alpha()
+rook_black_scaled = pygame.transform.scale(rook_black, (75, 75))
+
+knight_white = pygame.image.load('Images/white_knight.png').convert_alpha()
+knight_white_scaled = pygame.transform.scale(knight_white, (75, 75))
+
+knight_black = pygame.image.load('Images/black_knight.png').convert_alpha()
+knight_black_scaled = pygame.transform.scale(knight_black, (75, 75))
+
 def init():
     outputList = []
     for i in range(8):
@@ -71,17 +108,17 @@ def rendering():
             piece = boardList[i][j].typeOfPiece
 
             if (piece == 'p'):
-                drawPawn(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawPawnImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
             elif (piece == 'r'):
-                drawRook(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawRookImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
             elif (piece == 'n'):
-                drawKnight(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawKnightImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
             elif (piece == 'k'):
-                drawKing(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawKingImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
             elif (piece == 'q'):
-                drawQueen(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawQueenImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
             elif (piece == 'b'):
-                drawBishop(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
+                drawBishopImg(340 + 75 * j, 60 + i * 75, boardList[i][j].color)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
@@ -95,11 +132,24 @@ def drawPawn(x,y,color):
     elif color == 'w':
         pygame.draw.rect(screen,pieceLight, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
 
+def drawPawnImg(x,y,color):
+    if color == 'w':
+        screen.blit(pawn_white_scaled, (x,y))
+    elif color == 'b':
+        pass
+        screen.blit(pawn_black_scaled, (x,y))
+
 def drawRook(x,y,color):
     if color == 'b':
         pygame.draw.rect(screen,pieceDark, (x + pieceW//4, y+5, pieceW,65))
     elif color == 'w':
         pygame.draw.rect(screen,pieceLight, (x + pieceW//4, y+5, pieceW,65))
+
+def drawRookImg(x,y,color):
+    if color == 'w':
+        screen.blit(rook_white_scaled, (x,y))
+    elif color == 'b':
+        screen.blit(rook_black_scaled, (x,y))
 
 def drawBishop(x,y,color):
     points = [(x+38,y+38+pieceH/2),(x+38+pieceW/2,y+38),(x+38-pieceW/2,y+38),(x+38,y+38-pieceH/2)]
@@ -108,11 +158,23 @@ def drawBishop(x,y,color):
     elif color == 'w':
         pygame.draw.polygon(screen,pieceLight,points)
 
+def drawBishopImg(x,y,color):
+    if color == 'w':
+        screen.blit(bishop_white_scaled, (x,y))
+    elif color == 'b':
+        screen.blit(bishop_black_scaled, (x,y))
+
 def drawQueen(x,y,color):
     if color == 'b':
         pygame.draw.circle(screen,pieceDark, (x+75//2, y+75//2),pieceW/2)
     elif color == 'w':
         pygame.draw.circle(screen,pieceLight, (x+75//2, y+75//2),pieceW/2)
+
+def drawQueenImg(x,y,color):
+    if color == 'w':
+        screen.blit(queen_white_scaled, (x,y))
+    elif color == 'b':
+        screen.blit(queen_black_scaled, (x,y))
 
 def drawKing(x,y,color):
     pawnSize = pieceW * 3 / 4
@@ -123,12 +185,24 @@ def drawKing(x,y,color):
         pygame.draw.rect(screen,pieceLight, (x+38-pawnSize/2, y+38-pawnSize/2, pawnSize,pawnSize))
         pygame.draw.circle(screen,pieceLight, (x+75//2, y+75//2),pieceW*5.25/12)
 
+def drawKingImg(x,y,color):
+    if color == 'w':
+        screen.blit(king_white_scaled, (x,y))
+    elif color == 'b':
+        screen.blit(king_black_scaled, (x,y))
+
 def drawKnight(x,y,color):
     knightSize = pieceW * 2 / 3
     if color == 'b':
         pygame.draw.ellipse(screen,pieceDark, (x + 13, y + 22, pieceW,knightSize))
     elif color == 'w':
         pygame.draw.ellipse(screen,pieceLight, (x + 13, y + 22, pieceW,knightSize))
+
+def drawKnightImg(x,y,color):
+    if color == 'w':
+        screen.blit(knight_white_scaled, (x,y))
+    elif color == 'b':
+        screen.blit(knight_black_scaled, (x,y))
 
 def selectSquare(x,y):
     for i in range(8):
