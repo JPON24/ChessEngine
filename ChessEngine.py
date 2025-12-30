@@ -528,7 +528,7 @@ def minimax(board, depth, alpha, beta, color):
             
         return minEval, bestMove
 
-material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':50, '-':0}
+material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':100, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
