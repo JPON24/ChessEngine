@@ -624,21 +624,57 @@ turnNumber = 0
 
 kingHasMoved = False
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import PGNReader as pgn
 
-from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
-model = LinearRegression()
+model = LogisticRegression()
 
 def inference(board, color):
+    pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
+
     possibleMoves = getLegalMoves(board, color)
     
-    for move in possibleMoves:
+    pieces = []
+    for i in possibleMoves:
+        pieces.append(board[i.y][i.x].typeOfPiece) 
 
+    pdPieces = pd.DataFrame(pieces)
+    piecesConverted = pieceOrdinal.fit_transform(pdPieces)  
+
+    isWhite = 0
+
+    if color == 'w':
+        isWhite = 1
+    elif color == 'b':
+        isWhite = 0
+
+    bestMove = ''
+    maxProb = 0
+
+    for i, move in enumerate(possibleMoves):
+        x_input = pd.DataFrame({
+            "isWhite": isWhite,
+            "material": getMaterial(board),
+            "x" : move.x,
+            "y" : move.y,
+            "tgtX" : move.tgtX,
+            "tgtY" : move.tgtY,
+            "piece" :  piecesConverted[i]
+        })
+
+        probability = model.predict_proba(x_input)  
+        
+        probability = probability[0,1]
+
+        if probability > maxProb:
+            maxProb = probability
+            bestMove = move
+
+    return maxProb, bestMove
+        
 
 def train(model, gamesToAnalyze):
     for i in range(min(len(pgn.gameList), gamesToAnalyze)):
@@ -653,6 +689,7 @@ def trainGame(model, x_train, y_train):
     print(gamesTrained)
     # print(x_train.shape)
     # print(y_train.shape)
+
     model.fit(x_train, y_train)
 
 def analyzeGame(index):
@@ -709,16 +746,16 @@ def analyzeGame(index):
 
         x_train.extend(xOut)
         y_train.extend(yOut)
-    
-    np_x = np.array(x_train)
 
+    np_x = np.array(x_train)
     np_x = np_x.reshape(np_x.shape[0], -1)
     
     np_y = np.array(y_train)
     return np_x, np_y
     
-gamesToAnalyze = 1000
+gamesToAnalyze = 1
 train(model, gamesToAnalyze)
+lambdaVal = 50
 
 while running:
     # poll for events
@@ -771,8 +808,16 @@ while running:
 
         eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
 
-        movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+        evalInf, moveInf = inference(boardList, 'b')
+
+        evalInf *= lambdaVal # prob
+
+        if abs(eval) > evalInf:
+            movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
                   boardList[move.y][move.x].typeOfPiece, 'b')
+        else:
+            movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+                  boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
 
         playerTurn = True
         turnNumber += 1
