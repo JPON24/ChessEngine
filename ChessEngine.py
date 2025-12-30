@@ -3,6 +3,7 @@ import pygame
 from BoardData import *
 import math
 import copy
+import time
 
 # pygame setup
 pygame.init()
@@ -439,6 +440,15 @@ def getLegalMoves(board, color):
 def checkGameOver(board, color):
     if len(getLegalMoves(board,color)) == 0:
         return True
+    
+    kingCount = 0
+    for i in range (8):
+        for j in range(8):
+            if board[i][j].typeOfPiece == 'k':
+                kingCount += 1
+    if kingCount != 2:
+        return True
+
     return False
 
 def evaluate(board):
@@ -518,7 +528,7 @@ def minimax(board, depth, alpha, beta, color):
             
         return minEval, bestMove
 
-material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':100, '-':0}
+material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':50, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
@@ -573,14 +583,20 @@ while running:
         
         eval, move = minimax(boardList, 3, -math.inf, math.inf, 'b')
 
-        print(eval)
-
         movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
                   boardList[move.y][move.x].typeOfPiece, 'b')
 
         playerTurn = True
         turnNumber += 1
 
+        print(f'Turn number : {turnNumber}. Eval : {eval}')
+
     rendering() 
+
+    if (checkGameOver(boardList, 'b')):
+        timestamp = time.time()
+        while (time.time() - timestamp) < 3:
+            rendering() 
+        break
     
 pygame.quit()
