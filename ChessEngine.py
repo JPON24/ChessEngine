@@ -181,11 +181,11 @@ def calculatePossibleMoves(boardList, x, y):
         positions = []
 
         if y == 1 and color == 'b':
-            # positions.append((x,y+1))
-            positions.append((x,y+2))
+            if (boardList[y+1][x].typeOfPiece == '-'):
+                positions.append((x,y+2))
         elif y == 6 and color == 'w':
-            # positions.append((x,y-1))
-            positions.append((x,y-2))
+            if (boardList[y-1][x].typeOfPiece == '-'):
+                positions.append((x,y-2))
             
         if color == 'b':
             positions.append((x,y+1))
@@ -486,7 +486,7 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
                     
                     board[y][5].typeOfPiece = 'r'
                     board[y][5].color = color
-            return
+                return
 
     board[y][x].typeOfPiece = '-'
     board[y][x].color = '-'
@@ -629,7 +629,10 @@ while running:
                     movePiece(boardList,selectedPieceX,selectedPieceY,
                                 selectedX,selectedY,boardList[selectedPieceY][selectedPieceX].typeOfPiece,'w')
                 selectedPieceX, selectedPieceY = selectSquare(mouse_x,mouse_y)        
-                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)        
+                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)
+                # print('\n\n-----\n\n')        
+                # for x in validMoves:
+                #     print(x)      
             else:
                 validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)
                 
@@ -653,9 +656,10 @@ while running:
         #     movePiece(boardList,turnNumber-8,1,
         #                         turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
         
-        # castling breaks when the engine is enabled?
+        # cannot promote
+        # add checking into legal moves, remove whatever the hell a king trade is lol
 
-        eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
+        eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
 
         movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
                   boardList[move.y][move.x].typeOfPiece, 'b')
@@ -663,7 +667,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        print(f'Turn number : {turnNumber}. Eval : {eval}')
+        # print(f'Turn number : {turnNumber}. Eval : {eval}')
 
     rendering() 
 

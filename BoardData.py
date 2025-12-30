@@ -31,6 +31,9 @@ class Move:
     def unpack(self):
         return self.x,self.y,self.tgtX,self.tgtY
     
+    def __str__(self):
+        return f"x : {self.x}, y : {self.y}, tgtX : {self.tgtX}, tgtY : {self.tgtY}"
+    
 class evalObj:
     eval = 0
     move = ''
