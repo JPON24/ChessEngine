@@ -498,7 +498,7 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
 
     playerTurn = not playerTurn
 
-def getLegalMoves(board, color):
+def getLegalMoves(board, color, depth):
     legalMoves = []
     
     for r in range(8):
@@ -506,10 +506,46 @@ def getLegalMoves(board, color):
             if (board[c][r].color == color):
                 legalMoves.extend(calculatePossibleMoves(board, r, c))
 
-    return legalMoves
+    if depth == 0:
+        return legalMoves
+    
+    out = []
+
+    for i in legalMoves:
+        copiedBoard = copy.deepcopy(board)
+
+        movePiece(copiedBoard, i.x, i.y, i.tgtX, i.tgtY, 
+                  copiedBoard[i.y][i.x].typeOfPiece, copiedBoard[i.y][i.x].color)
+
+        if color == 'w':
+            newLegalMoves = getLegalMoves(copiedBoard, 'b', 0)
+        elif color == 'b':
+            newLegalMoves = getLegalMoves(copiedBoard, 'w', 0)
+
+        illegal = False
+
+        for move in newLegalMoves:
+            newCopy = copy.deepcopy(copiedBoard)
+
+            movePiece(newCopy, move.x, move.y, move.tgtX, move.tgtY, 
+                            newCopy[move.y][move.x].typeOfPiece, newCopy[move.y][move.x].color)
+            
+            kingCount = 0
+            for r in range(8):
+                for c in range(8):
+                    if newCopy[r][c].typeOfPiece == 'k':
+                        kingCount += 1
+
+            if kingCount != 2:
+                illegal = True
+                break
+        if not illegal:
+            out.append(i)
+            
+    return out
 
 def checkGameOver(board, color):
-    if len(getLegalMoves(board,color)) == 0:
+    if len(getLegalMoves(board,color, 0)) == 0:
         return True
     
     kingCount = 0
@@ -557,8 +593,8 @@ def evaluate(board):
                 elif color == 'b':
                     blackKingMoves = len(calculatePossibleMoves(board, i, j))
 
-    whiteLegal = getLegalMoves(board, 'w')
-    blackLegal = getLegalMoves(board, 'b')
+    whiteLegal = getLegalMoves(board, 'w', 1)
+    blackLegal = getLegalMoves(board, 'b', 1)
 
     materialEval = whiteScore - blackScore
 
@@ -583,7 +619,7 @@ def minimax(board, depth, alpha, beta, color):
 
     if color == 'w':
         maxEval = -math.inf
-        possibleMoves = getLegalMoves(board, 'w')
+        possibleMoves = getLegalMoves(board, 'w', 1)
         bestMove = ''
 
         for move in possibleMoves:
@@ -602,7 +638,7 @@ def minimax(board, depth, alpha, beta, color):
         return maxEval, bestMove
     else:
         minEval = math.inf
-        possibleMoves = getLegalMoves(board, 'b')
+        possibleMoves = getLegalMoves(board, 'b', 1)
         bestMove = ''
 
         for move in possibleMoves:
@@ -644,7 +680,7 @@ model = LogisticRegression()
 def inference(board, color):
     pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
 
-    possibleMoves = getLegalMoves(board, color)
+    possibleMoves = getLegalMoves(board, color, 1)
     
     pieces = []
     for i in possibleMoves:
@@ -684,7 +720,6 @@ def inference(board, color):
             maxLogit = rawLogit
 
     return maxProb, maxLogit, bestMove
-        
 
 def train(model, gamesToAnalyze):
     for i in range(min(len(pgn.gameList), gamesToAnalyze)):
@@ -717,7 +752,7 @@ def analyzeGame(index):
         else:
             color = 'b'
 
-        possibleMoves = getLegalMoves(boardList, color)
+        possibleMoves = getLegalMoves(boardList, color, 1)
         
         xOut = pd.DataFrame([])
         yOut = []
@@ -819,16 +854,16 @@ while running:
         selectedX = -1
         selectedY = -1
 
-        # if (turnNumber > 7):
-        #     movePiece(boardList,turnNumber-8,2,
-        #                         turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
-        # else:
-            # movePiece(boardList,turnNumber-8,1,
-            #                     turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
-            
+        if (turnNumber > 7):
+            movePiece(boardList,turnNumber-8,2,
+                                turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
+        else:
+            movePiece(boardList,turnNumber-8,1,
+                                turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
+
         # add checking into legal moves, remove whatever the hell a king trade is lol
 
-        # eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
+        # eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
 
         # confidence, evalInf, moveInf = inference(boardList, 'b')
 
@@ -853,7 +888,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        print(f'Turn number : {turnNumber}. Eval : {eval}')
+        # print(f'Turn number : {turnNumber}. Eval : {eval}')
 
     rendering() 
 
