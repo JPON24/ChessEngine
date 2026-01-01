@@ -653,11 +653,12 @@ def inference(board, color):
 
     bestMove = ''
     maxProb = 0
+    maxLogit = 0
 
     for i, move in enumerate(possibleMoves):
         x_input = pd.DataFrame({
             "isWhite": isWhite,
-            "material": getMaterial(board),
+            "eval": evaluate(board),
             "x" : move.x,
             "y" : move.y,
             "tgtX" : move.tgtX,
@@ -665,15 +666,15 @@ def inference(board, color):
             "piece" :  piecesConverted[i]
         })
 
-        probability = model.predict_proba(x_input)  
-        
-        probability = probability[0,1]
+        probability = model.predict_proba(x_input)[0, 1]
+        rawLogit = model.decision_function(x_input)
 
-        if probability > maxProb:
+        if maxLogit > rawLogit:
             maxProb = probability
             bestMove = move
+            maxLogit = rawLogit
 
-    return maxProb, bestMove
+    return maxProb, maxLogit, bestMove
         
 
 def train(model, gamesToAnalyze):
@@ -687,8 +688,6 @@ def trainGame(model, x_train, y_train):
     global gamesTrained
     gamesTrained += 1
     print(gamesTrained)
-    # print(x_train.shape)
-    # print(y_train.shape)
 
     model.fit(x_train, y_train)
 
@@ -700,7 +699,7 @@ def analyzeGame(index):
     isWhite = 1
     color = 'w'
 
-    x_train = []
+    x_train = pd.DataFrame([])
     y_train = []
 
     for move in moves:
@@ -711,7 +710,7 @@ def analyzeGame(index):
 
         possibleMoves = getLegalMoves(boardList, color)
         
-        xOut = []
+        xOut = pd.DataFrame([])
         yOut = []
 
         pieces = []
@@ -724,7 +723,7 @@ def analyzeGame(index):
         for i, pos in enumerate(possibleMoves):
             x = pd.DataFrame({
                 "isWhite": isWhite % 2,
-                "material": getMaterial(boardList),
+                "eval": evaluate(boardList),
                 "x" : pos.x,
                 "y" : pos.y,
                 "tgtX" : pos.tgtX,
@@ -738,24 +737,39 @@ def analyzeGame(index):
             move.tgtX == pos.tgtX and move.tgtY == pos.tgtY):
                 y = 1
             
-            xOut.append(x)
+            xOut = pd.concat([xOut,x])
             yOut.append(y)
 
         movePiece(boardList,move.x,move.y,move.tgtX,move.tgtY,boardList[move.y][move.x].typeOfPiece,color)
         isWhite += 1
 
-        x_train.extend(xOut)
+        x_train = pd.concat([x_train, xOut])
         y_train.extend(yOut)
 
-    np_x = np.array(x_train)
-    np_x = np_x.reshape(np_x.shape[0], -1)
+    pd_x = x_train
+    pd_y = y_train
+
+    # np_x = np.array(x_train)
+    # np_x = np_x.reshape(np_x.shape[0], -1)
     
-    np_y = np.array(y_train)
-    return np_x, np_y
+    # np_y = np.array(y_train)
+    # return np_x, np_y
+    return pd_x, pd_y
     
-gamesToAnalyze = 1
-train(model, gamesToAnalyze)
-lambdaVal = 50
+# gamesToAnalyze = 1000
+# train(model, gamesToAnalyze)
+
+import pickle
+
+# # Save the model to a file
+# with open('model.pkl', 'wb') as f:
+#     pickle.dump(model, f)
+
+# To load the model later:
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+lambdaVal = 0
 
 while running:
     # poll for events
@@ -808,16 +822,25 @@ while running:
 
         eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
 
-        evalInf, moveInf = inference(boardList, 'b')
+        confidence, evalInf, moveInf = inference(boardList, 'b')
 
-        evalInf *= lambdaVal # prob
+        evalInf *= lambdaVal
 
-        if abs(eval) > evalInf:
-            movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
-                  boardList[move.y][move.x].typeOfPiece, 'b')
-        else:
+        print(f'confidence : {confidence}, evalInf : {evalInf}, evalMini : {eval}')
+
+        if confidence > 0.03:
+            print("inference move")
             movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
                   boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+        else:
+            # if abs(eval) > abs(evalInf):
+            print("minimax move")
+            movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+                boardList[move.y][move.x].typeOfPiece, 'b')
+            # else:
+            #     print("inference move")
+            #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+            #         boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
 
         playerTurn = True
         turnNumber += 1
