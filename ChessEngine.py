@@ -494,6 +494,8 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
     board[tgtY][tgtX].typeOfPiece = piece
     board[tgtY][tgtX].color = color
 
+    promote(board)
+
     playerTurn = not playerTurn
 
 def getLegalMoves(board, color):
@@ -567,6 +569,13 @@ def evaluate(board):
     score = materialEval + positional + kingSafety
 
     return score
+
+def promote(board):
+    for i in range(8):
+        if board[0][i].typeOfPiece == 'p':
+            board[0][i].typeOfPiece = 'q'
+        if board[7][i].typeOfPiece == 'p':
+            board[7][i].typeOfPiece = 'q'
 
 def minimax(board, depth, alpha, beta, color):
     if checkGameOver(board, color) or depth == 0:
@@ -766,8 +775,8 @@ import pickle
 #     pickle.dump(model, f)
 
 # To load the model later:
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
+# with open('model.pkl', 'rb') as f:
+#     model = pickle.load(f)
 
 lambdaVal = 0
 
@@ -814,29 +823,28 @@ while running:
         #     movePiece(boardList,turnNumber-8,2,
         #                         turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
         # else:
-        #     movePiece(boardList,turnNumber-8,1,
-        #                         turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
-        
-        # cannot promote
+            # movePiece(boardList,turnNumber-8,1,
+            #                     turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
+            
         # add checking into legal moves, remove whatever the hell a king trade is lol
 
-        eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
+        # eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
 
-        confidence, evalInf, moveInf = inference(boardList, 'b')
+        # confidence, evalInf, moveInf = inference(boardList, 'b')
 
-        evalInf *= lambdaVal
+        # evalInf *= lambdaVal
 
-        print(f'confidence : {confidence}, evalInf : {evalInf}, evalMini : {eval}')
+        # print(f'confidence : {confidence}, evalInf : {evalInf}, evalMini : {eval}')
 
-        if confidence > 0.03:
-            print("inference move")
-            movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
-                  boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
-        else:
-            # if abs(eval) > abs(evalInf):
-            print("minimax move")
-            movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
-                boardList[move.y][move.x].typeOfPiece, 'b')
+        # if confidence > 0.03:
+        #     print("inference move")
+        #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+        #           boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+        # else:
+        #     # if abs(eval) > abs(evalInf):
+        # print("minimax move")
+        # movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+        #     boardList[move.y][move.x].typeOfPiece, 'b')
             # else:
             #     print("inference move")
             #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
@@ -845,7 +853,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        # print(f'Turn number : {turnNumber}. Eval : {eval}')
+        print(f'Turn number : {turnNumber}. Eval : {eval}')
 
     rendering() 
 
