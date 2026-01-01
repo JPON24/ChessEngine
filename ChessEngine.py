@@ -528,6 +528,9 @@ def getLegalMoves(board, color, check):
     
     for r in range(8):
         for c in range(8):
+            if (board[c][r].typeOfPiece == '-'):
+                continue
+
             if (board[c][r].color == color):
                 legalMoves.extend(calculatePossibleMoves(board, r, c, check))
 
@@ -535,14 +538,6 @@ def getLegalMoves(board, color, check):
 
 def checkGameOver(board, color):
     if len(getLegalMoves(board,color,True)) == 0:
-        return True
-    
-    kingCount = 0
-    for i in range (8):
-        for j in range(8):
-            if board[i][j].typeOfPiece == 'k':
-                kingCount += 1
-    if kingCount != 2:
         return True
 
     return False
@@ -565,16 +560,24 @@ def evaluate(board):
     whiteScore = 0
     blackScore = 0
 
+    whiteLegal = 0
+    blackLegal = 0
+
     whiteKingMoves = 0 
     blackKingMoves = 0
 
     for i in range(8):
         for j in range(8):
+            if board[i][j].typeOfPiece == '-':
+                continue
+
             color = board[i][j].color
             if (color == 'w'):
                 whiteScore += material[board[i][j].typeOfPiece]
+                whiteLegal += len(calculatePossibleMoves(board, i, j, True))
             elif (color == 'b'):
                 blackScore += material[board[i][j].typeOfPiece]
+                blackLegal += len(calculatePossibleMoves(board, i, j, True))
 
             if board[i][j].typeOfPiece == 'k':
                 if color == 'w':
@@ -582,12 +585,9 @@ def evaluate(board):
                 elif color == 'b':
                     blackKingMoves = len(calculatePossibleMoves(board, i, j, True))
 
-    whiteLegal = getLegalMoves(board, 'w', True)
-    blackLegal = getLegalMoves(board, 'b', True)
-
     materialEval = whiteScore - blackScore
 
-    positional = (len(whiteLegal) - len(blackLegal)) * 0.1    
+    positional = (whiteLegal - blackLegal) * 0.1    
 
     kingSafety = ((8-whiteKingMoves) - (8-blackKingMoves)) * 0.01
 
@@ -693,6 +693,7 @@ def inference(board, color):
         x_input = pd.DataFrame({
             "isWhite": isWhite,
             "eval": evaluate(board),
+            "board": board,
             "x" : move.x,
             "y" : move.y,
             "tgtX" : move.tgtX,
@@ -757,6 +758,7 @@ def analyzeGame(index):
             x = pd.DataFrame({
                 "isWhite": isWhite % 2,
                 "eval": evaluate(boardList),
+                "board":boardList,
                 "x" : pos.x,
                 "y" : pos.y,
                 "tgtX" : pos.tgtX,
