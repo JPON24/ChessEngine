@@ -170,7 +170,7 @@ def selectSquare(x,y):
                 return j,i
     return -1, -1
 
-def calculatePossibleMoves(boardList, x, y):
+def calculatePossibleMoves(boardList, x, y, check):
     position = boardList[y][x]
     piece = position.typeOfPiece
     color = position.color
@@ -454,6 +454,33 @@ def calculatePossibleMoves(boardList, x, y):
                 continue
             validMoves.append(Move(x, y, i[0], i[1]))
     
+    out = []
+
+    if check:
+        for move in validMoves:
+            copiedBoard = copy.deepcopy(boardList)
+
+            movePiece(copiedBoard, move.x, move.y, move.tgtX, move.tgtY, 
+                                copiedBoard[move.y][move.x].typeOfPiece, copiedBoard[move.y][move.x].color)
+
+            legalMovesOther = ''
+            color = copiedBoard[move.tgtY][move.tgtX].color
+
+            if color == 'w':
+                legalMovesOther = getLegalMoves(copiedBoard, 'b', False)
+            elif color == 'b':
+                legalMovesOther = getLegalMoves(copiedBoard, 'w', False)
+
+            illegal = False
+            for i in legalMovesOther:
+                if copiedBoard[i.tgtY][i.tgtX].typeOfPiece == 'k' and copiedBoard[i.tgtY][i.tgtX].color == color:
+                    illegal = True
+                    break
+
+            if not illegal:
+                out.append(move)
+
+        return out
     return validMoves
 
 def movePiece(board,x,y,tgtX,tgtY,piece,color):
@@ -496,56 +523,18 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
 
     promote(board)
 
-    playerTurn = not playerTurn
-
-def getLegalMoves(board, color, depth):
+def getLegalMoves(board, color, check):
     legalMoves = []
     
     for r in range(8):
         for c in range(8):
             if (board[c][r].color == color):
-                legalMoves.extend(calculatePossibleMoves(board, r, c))
+                legalMoves.extend(calculatePossibleMoves(board, r, c, check))
 
-    if depth == 0:
-        return legalMoves
-    
-    out = []
-
-    for i in legalMoves:
-        copiedBoard = copy.deepcopy(board)
-
-        movePiece(copiedBoard, i.x, i.y, i.tgtX, i.tgtY, 
-                  copiedBoard[i.y][i.x].typeOfPiece, copiedBoard[i.y][i.x].color)
-
-        if color == 'w':
-            newLegalMoves = getLegalMoves(copiedBoard, 'b', 0)
-        elif color == 'b':
-            newLegalMoves = getLegalMoves(copiedBoard, 'w', 0)
-
-        illegal = False
-
-        for move in newLegalMoves:
-            newCopy = copy.deepcopy(copiedBoard)
-
-            movePiece(newCopy, move.x, move.y, move.tgtX, move.tgtY, 
-                            newCopy[move.y][move.x].typeOfPiece, newCopy[move.y][move.x].color)
-            
-            kingCount = 0
-            for r in range(8):
-                for c in range(8):
-                    if newCopy[r][c].typeOfPiece == 'k':
-                        kingCount += 1
-
-            if kingCount != 2:
-                illegal = True
-                break
-        if not illegal:
-            out.append(i)
-            
-    return out
+    return legalMoves
 
 def checkGameOver(board, color):
-    if len(getLegalMoves(board,color, 0)) == 0:
+    if len(getLegalMoves(board,color,True)) == 0:
         return True
     
     kingCount = 0
@@ -589,12 +578,12 @@ def evaluate(board):
 
             if board[i][j].typeOfPiece == 'k':
                 if color == 'w':
-                    whiteKingMoves = len(calculatePossibleMoves(board, i, j))
+                    whiteKingMoves = len(calculatePossibleMoves(board, i, j, True))
                 elif color == 'b':
-                    blackKingMoves = len(calculatePossibleMoves(board, i, j))
+                    blackKingMoves = len(calculatePossibleMoves(board, i, j, True))
 
-    whiteLegal = getLegalMoves(board, 'w', 1)
-    blackLegal = getLegalMoves(board, 'b', 1)
+    whiteLegal = getLegalMoves(board, 'w', True)
+    blackLegal = getLegalMoves(board, 'b', True)
 
     materialEval = whiteScore - blackScore
 
@@ -619,7 +608,7 @@ def minimax(board, depth, alpha, beta, color):
 
     if color == 'w':
         maxEval = -math.inf
-        possibleMoves = getLegalMoves(board, 'w', 1)
+        possibleMoves = getLegalMoves(board, 'w', True)
         bestMove = ''
 
         for move in possibleMoves:
@@ -638,7 +627,7 @@ def minimax(board, depth, alpha, beta, color):
         return maxEval, bestMove
     else:
         minEval = math.inf
-        possibleMoves = getLegalMoves(board, 'b', 1)
+        possibleMoves = getLegalMoves(board, 'b', True)
         bestMove = ''
 
         for move in possibleMoves:
@@ -680,7 +669,7 @@ model = LogisticRegression()
 def inference(board, color):
     pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
 
-    possibleMoves = getLegalMoves(board, color, 1)
+    possibleMoves = getLegalMoves(board, color, True)
     
     pieces = []
     for i in possibleMoves:
@@ -752,7 +741,7 @@ def analyzeGame(index):
         else:
             color = 'b'
 
-        possibleMoves = getLegalMoves(boardList, color, 1)
+        possibleMoves = getLegalMoves(boardList, color, True)
         
         xOut = pd.DataFrame([])
         yOut = []
@@ -833,13 +822,14 @@ while running:
                 if (boardList[selectedY][selectedX].typeOfPiece == 'r' and not kingHasMoved and boardList[selectedPieceY][selectedPieceX].typeOfPiece == 'k'):
                     movePiece(boardList,selectedPieceX,selectedPieceY,
                                 selectedX,selectedY,boardList[selectedPieceY][selectedPieceX].typeOfPiece,'w')
+                    playerTurn = False
                 selectedPieceX, selectedPieceY = selectSquare(mouse_x,mouse_y)        
-                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)
+                validMoves = (boardList, selectedPieceX, selectedPieceY, True)
                 # print('\n\n-----\n\n')        
                 # for x in validMoves:
                 #     print(x)      
             else:
-                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)
+                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY, True)
                 
                 unpacked = []
                 for i in validMoves:
@@ -848,22 +838,23 @@ while running:
                 if (selectedPieceX,selectedPieceY,selectedX,selectedY) in unpacked:
                     movePiece(boardList,selectedPieceX,selectedPieceY,
                                 selectedX,selectedY,boardList[selectedPieceY][selectedPieceX].typeOfPiece,'w')
+                    playerTurn = False
     else:
         selectedPieceX = -1
         selectedPieceY = -1
         selectedX = -1
         selectedY = -1
 
-        if (turnNumber > 7):
-            movePiece(boardList,turnNumber-8,2,
-                                turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
-        else:
-            movePiece(boardList,turnNumber-8,1,
-                                turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
+        # if (turnNumber > 7):
+        #     movePiece(boardList,turnNumber-8,2,
+        #                         turnNumber-8,3,boardList[2][turnNumber-8].typeOfPiece,'b') 
+        # else:
+        #     movePiece(boardList,turnNumber-8,1,
+        #                         turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
 
         # add checking into legal moves, remove whatever the hell a king trade is lol
 
-        # eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
+        eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
 
         # confidence, evalInf, moveInf = inference(boardList, 'b')
 
@@ -877,9 +868,9 @@ while running:
         #           boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
         # else:
         #     # if abs(eval) > abs(evalInf):
-        # print("minimax move")
-        # movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
-        #     boardList[move.y][move.x].typeOfPiece, 'b')
+        print("minimax move")
+        movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+            boardList[move.y][move.x].typeOfPiece, 'b')
             # else:
             #     print("inference move")
             #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
