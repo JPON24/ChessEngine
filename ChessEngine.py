@@ -170,7 +170,12 @@ def selectSquare(x,y):
                 return j,i
     return -1, -1
 
+calls = 0
+
 def calculatePossibleMoves(boardList, x, y, check):
+    global calls
+
+    calls += 1
     position = boardList[y][x]
     piece = position.typeOfPiece
     color = position.color
@@ -814,9 +819,8 @@ while running:
             running = False
 
     if (playerTurn):
-
         if event.type == pygame.MOUSEBUTTONDOWN:
-            
+            calls = 0
             mouse_x, mouse_y = pygame.mouse.get_pos()
             selectedX, selectedY = selectSquare(mouse_x,mouse_y)
 
@@ -856,7 +860,9 @@ while running:
 
         # add checking into legal moves, remove whatever the hell a king trade is lol
 
-        eval, move = minimax(boardList, 2, -math.inf, math.inf, 'b')
+        startingTimestamp = time.time()
+
+        eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
 
         # confidence, evalInf, moveInf = inference(boardList, 'b')
 
@@ -870,7 +876,7 @@ while running:
         #           boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
         # else:
         #     # if abs(eval) > abs(evalInf):
-        print("minimax move")
+        # print("minimax move")
         movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
             boardList[move.y][move.x].typeOfPiece, 'b')
             # else:
@@ -881,7 +887,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        # print(f'Turn number : {turnNumber}. Eval : {eval}')
+        print(f'Turn number : {turnNumber}. Eval : {eval}. Move time : {time.time()-startingTimestamp}. Calls : {calls}')
 
     rendering() 
 
