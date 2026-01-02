@@ -671,43 +671,87 @@ from sklearn.model_selection import train_test_split
 
 model = LogisticRegression()
 
-def inference(board, color):
-    pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
+def inference(boardList, color):
+    newOrdinal = OrdinalEncoder()
+    categories = [
+        ['p'],['n'],['b'],['r'],['k'],['q'],['-']
+    ]
 
-    possibleMoves = getLegalMoves(board, color, True)
+    newOrdinal.fit(categories)
     
-    pieces = []
-    for i in possibleMoves:
-        pieces.append(board[i.y][i.x].typeOfPiece) 
-
-    pdPieces = pd.DataFrame(pieces)
-    piecesConverted = pieceOrdinal.fit_transform(pdPieces)  
-
-    isWhite = 0
+    isWhite = 1
+    colorOther = 'b'
 
     if color == 'w':
+        colorOther = 'b'
         isWhite = 1
     elif color == 'b':
+        colorOther = 'w'
         isWhite = 0
+
+    possibleMoves = getLegalMoves(boardList, color, True)
+    possibleMovesOther = getLegalMoves(boardList, colorOther, True)
+
+    possibleMovesW = ''
+    possibleMovesB = ''
+    
+    if color == 'w':
+        possibleMovesW = possibleMoves
+        possibleMovesB = possibleMovesOther
+    elif color == 'b':
+        possibleMovesW = possibleMovesOther
+        possibleMovesB = possibleMoves
+
+    pieces = []
+    for i in possibleMoves:
+        pieces.append([boardList[i.y][i.x].typeOfPiece]) 
+
+    piecesConverted = newOrdinal.transform(pieces)
+
+    flattenedBoard = []
+    flattenedBoardPieces = []
+    flattenedBoardColors = []
+    
+    boardPieces = []
+    
+    for i, val in enumerate(boardList):
+        flattenedBoard.extend(val)
+        tempPiece = []
+
+        for j in range(8):
+            tempPiece.append([boardList[i][j].typeOfPiece])
+            if boardList[i][j].color == 'w':
+                flattenedBoardColors.extend([1.0])
+            elif boardList[i][j].color == 'b':
+                flattenedBoardColors.extend([-1.0])
+            else:
+                flattenedBoardColors.extend([0.0])
+
+        boardPieces.extend(tempPiece)
+
+    flattenedBoardPieces = newOrdinal.transform(boardPieces)
 
     bestMove = ''
     maxProb = 0
     maxLogit = 0
 
     for i, move in enumerate(possibleMoves):
-        x_input = pd.DataFrame({
-            "isWhite": isWhite,
-            "eval": evaluate(board),
-            "board": board,
-            "x" : move.x,
-            "y" : move.y,
-            "tgtX" : move.tgtX,
-            "tgtY" : move.tgtY,
-            "piece" :  piecesConverted[i]
-        })
+        inputFeatures = []
+        inputFeatures += [isWhite % 2,
+                            evaluate(flattenedBoard, possibleMovesB, possibleMovesW, True),
+                            move.x,
+                            move.y,
+                            move.tgtX,
+                            move.tgtY,
+                            piecesConverted[i][0]]
+        
+        inputFeatures += flattenedBoardPieces.T[0].tolist()
+        inputFeatures += flattenedBoardColors
 
-        probability = model.predict_proba(x_input)[0, 1]
-        rawLogit = model.decision_function(x_input)
+        x = pd.DataFrame(inputFeatures)
+
+        probability = model.predict_proba(x.T)[0, 1]
+        rawLogit = model.decision_function(x.T)
 
         if probability > maxProb:
             maxProb = probability
@@ -721,7 +765,7 @@ def train(model, gamesToAnalyze):
         x_train, y_train = analyzeGame(i)
         trainGame(model, x_train, y_train)
 
-gamesTrained = 0
+gamesTrained = 10
 
 def trainGame(model, x_train, y_train):
     global gamesTrained
@@ -780,9 +824,6 @@ def analyzeGame(index):
         pieces = []
         for i in possibleMoves:
             pieces.append([boardList[i.y][i.x].typeOfPiece]) 
-
-
-        # candidates = possibleMoves[:min(len(possibleMoves),20)]
 
         piecesConverted = newOrdinal.transform(pieces)
 
