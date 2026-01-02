@@ -181,6 +181,7 @@ def calculatePossibleMoves(boardList, x, y, check):
     color = position.color
 
     validMoves = []
+    attackingMoves = []
 
     if piece == 'p':
         positions = []
@@ -195,10 +196,10 @@ def calculatePossibleMoves(boardList, x, y, check):
         if color == 'b':
             positions.append((x,y+1))
             if x+1 <= 7 and y+1 <= 7:
-                if boardList[y+1][x+1].color == 'b':
+                if boardList[y+1][x+1].color == 'w':
                     validMoves.append(Move(x, y, x+1, y+1))
             if x-1 >= 0 and y+1 <= 7:
-                if boardList[y+1][x-1].color == 'b':
+                if boardList[y+1][x-1].color == 'w':
                     validMoves.append(Move(x, y, x-1, y+1))
 
         elif color == 'w':
@@ -472,9 +473,9 @@ def calculatePossibleMoves(boardList, x, y, check):
             color = copiedBoard[move.tgtY][move.tgtX].color
 
             if color == 'w':
-                legalMovesOther = getLegalMoves(copiedBoard, 'b', False)
+                legalMovesOther = getLegalMoves(copiedBoard, 'b', False, validMoves)
             elif color == 'b':
-                legalMovesOther = getLegalMoves(copiedBoard, 'w', False)
+                legalMovesOther = getLegalMoves(copiedBoard, 'w', False, validMoves)
 
             illegal = False
             for i in legalMovesOther:
@@ -528,7 +529,7 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
 
     promote(board)
 
-def getLegalMoves(board, color, check):
+def getLegalMoves(board, color, check, legalMovesPrev=[]):
     legalMoves = []
     
     for r in range(8):
@@ -561,42 +562,36 @@ def getMaterial(board):
     
     return whiteScore - blackScore
 
-def evaluate(board):
+def evaluate(board, possibleMovesB, possibleMovesW, training = False):
     whiteScore = 0
     blackScore = 0
 
-    whiteLegal = 0
-    blackLegal = 0
-
-    whiteKingMoves = 0 
-    blackKingMoves = 0
-
     for i in range(8):
         for j in range(8):
-            if board[i][j].typeOfPiece == '-':
-                continue
+            if training:
+                if board[i*8 + j].typeOfPiece == '-':
+                    continue
 
-            color = board[i][j].color
-            if (color == 'w'):
-                whiteScore += material[board[i][j].typeOfPiece]
-                whiteLegal += len(calculatePossibleMoves(board, i, j, True))
-            elif (color == 'b'):
-                blackScore += material[board[i][j].typeOfPiece]
-                blackLegal += len(calculatePossibleMoves(board, i, j, True))
+                color = board[i*8+j].color
+                if (color == 'w'):
+                    whiteScore += material[board[i*8+j].typeOfPiece]
+                elif (color == 'b'):
+                    blackScore += material[board[i*8+j].typeOfPiece]
+            else:
+                if board[i][j].typeOfPiece == '-':
+                    continue
 
-            if board[i][j].typeOfPiece == 'k':
-                if color == 'w':
-                    whiteKingMoves = len(calculatePossibleMoves(board, i, j, True))
-                elif color == 'b':
-                    blackKingMoves = len(calculatePossibleMoves(board, i, j, True))
-
+                color = board[i][j].color
+                if (color == 'w'):
+                    whiteScore += material[board[i][j].typeOfPiece]
+                elif (color == 'b'):
+                    blackScore += material[board[i][j].typeOfPiece]
+    
     materialEval = whiteScore - blackScore
 
-    positional = (whiteLegal - blackLegal) * 0.1    
+    positional = (len(possibleMovesW) - len(possibleMovesB)) * 0.1
 
-    kingSafety = ((8-whiteKingMoves) - (8-blackKingMoves)) * 0.01
-
-    score = materialEval + positional + kingSafety
+    score = materialEval + positional
 
     return score
 
@@ -607,19 +602,21 @@ def promote(board):
         if board[7][i].typeOfPiece == 'p':
             board[7][i].typeOfPiece = 'q'
 
-def minimax(board, depth, alpha, beta, color):
+def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
+    global maxDepth
     if checkGameOver(board, color) or depth == 0:
-        return evaluate(board), Move(0,0,0,0)
+        return evaluate(board, possibleMovesB, possibleMovesW), Move(0,0,0,0)
 
     if color == 'w':
         maxEval = -math.inf
         possibleMoves = getLegalMoves(board, 'w', True)
+        possibleMovesW = possibleMoves
         bestMove = ''
 
         for move in possibleMoves:
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'w')
-            eval,_ = minimax(copiedBoard, depth-1, alpha, beta, 'b')
+            eval,_ = minimax(copiedBoard, depth-1, alpha, beta, 'b', possibleMovesB, possibleMovesW)
             alpha = max(alpha, eval)
 
             if (eval > maxEval):
@@ -633,12 +630,13 @@ def minimax(board, depth, alpha, beta, color):
     else:
         minEval = math.inf
         possibleMoves = getLegalMoves(board, 'b', True)
+        possibleMovesB = possibleMoves
         bestMove = ''
 
         for move in possibleMoves:
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'b')
-            eval, _ = minimax(copiedBoard, depth-1, alpha, beta, 'w')
+            eval, _ = minimax(copiedBoard, depth-1, alpha, beta, 'w', possibleMovesB, possibleMovesW)
             beta = min(beta, eval)
 
             if (eval < minEval):
@@ -650,7 +648,7 @@ def minimax(board, depth, alpha, beta, color):
             
         return minEval, bestMove
 
-material = {'p':1, 'n':3, 'b':3.1, 'r':5, 'q': 9, 'k':100, '-':0}
+material = {'p':100, 'n':300, 'b':310, 'r':500, 'q': 900, 'k':10000, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
@@ -709,7 +707,7 @@ def inference(board, color):
         probability = model.predict_proba(x_input)[0, 1]
         rawLogit = model.decision_function(x_input)
 
-        if maxLogit > rawLogit:
+        if probability > maxProb:
             maxProb = probability
             bestMove = move
             maxLogit = rawLogit
@@ -730,13 +728,19 @@ def trainGame(model, x_train, y_train):
 
     model.fit(x_train, y_train)
 
-def analyzeGame(index):
-    pieceOrdinal = OrdinalEncoder(categories=[['p','n','b','r','k','q']])
-    
+def analyzeGame(index): 
+    newOrdinal = OrdinalEncoder()
+    categories = [
+        ['p'],['n'],['b'],['r'],['k'],['q'],['-']
+    ]
+
+    newOrdinal.fit(categories)
+
     boardList = init()
     moves = pgn.getGame(index)
     isWhite = 1
     color = 'w'
+    colorOther = 'b'
 
     x_train = pd.DataFrame([])
     y_train = []
@@ -744,32 +748,81 @@ def analyzeGame(index):
     for move in moves:
         if isWhite%2 == 1:
             color = 'w'
+            colorOther = 'b'
         else:
             color = 'b'
+            colorOther = 'w'
 
         possibleMoves = getLegalMoves(boardList, color, True)
+        possibleMovesOther = getLegalMoves(boardList, colorOther, True)
+
+        possibleMovesW = ''
+        possibleMovesB = ''
         
+        if color == 'w':
+            possibleMovesW = possibleMoves
+            possibleMovesB = possibleMovesOther
+        elif color == 'b':
+            possibleMovesW = possibleMovesOther
+            possibleMovesB = possibleMoves
+
         xOut = pd.DataFrame([])
         yOut = []
 
         pieces = []
         for i in possibleMoves:
-            pieces.append(boardList[i.y][i.x].typeOfPiece) 
+            pieces.append([boardList[i.y][i.x].typeOfPiece]) 
 
-        pdMoves = pd.DataFrame(pieces)
-        piecesConverted = pieceOrdinal.fit_transform(pdMoves)
+        piecesConverted = newOrdinal.transform(pieces)
+
+        flattenedBoard = []
+        flattenedBoardPieces = []
+        flattenedBoardColors = []
+        
+        boardPieces = []
+        
+        for i, val in enumerate(boardList):
+            flattenedBoard.extend(val)
+            tempPiece = []
+
+            for j in range(8):
+                tempPiece.append([boardList[i][j].typeOfPiece])
+                if boardList[i][j].color == 'w':
+                    flattenedBoardColors.extend([1.0])
+                elif boardList[i][j].color == 'b':
+                    flattenedBoardColors.extend([-1.0])
+                else:
+                    flattenedBoardColors.extend([0.0])
+
+            boardPieces.extend(tempPiece)
+
+        flattenedBoardPieces = newOrdinal.transform(boardPieces)
 
         for i, pos in enumerate(possibleMoves):
-            x = pd.DataFrame({
-                "isWhite": isWhite % 2,
-                "eval": evaluate(boardList),
-                "board":boardList,
-                "x" : pos.x,
-                "y" : pos.y,
-                "tgtX" : pos.tgtX,
-                "tgtY" : pos.tgtY,
-                "piece" :  piecesConverted[i]
-            })
+            inputFeatures = []
+            inputFeatures += [isWhite % 2,
+                              evaluate(flattenedBoard, possibleMovesB, possibleMovesW, True),
+                              pos.x,
+                              pos.y,
+                              pos.tgtX,
+                              pos.tgtY,
+                              piecesConverted[i]]
+            
+            # inputFeatures += flattenedBoardPieces
+            inputFeatures += flattenedBoardColors
+
+            x = pd.DataFrame(inputFeatures)
+            # x = pd.DataFrame({
+            #     "isWhite": isWhite % 2,
+            #     "eval": evaluate(flattenedBoard, possibleMovesB, possibleMovesW, True),
+            #     "boardPieces":flattenedBoardPieces,
+            #     "boardColors":flattenedBoardColors,
+            #     "x" : pos.x,
+            #     "y" : pos.y,
+            #     "tgtX" : pos.tgtX,
+            #     "tgtY" : pos.tgtY,
+            #     "piece" :  piecesConverted[i]
+            # })
 
             y = 0
 
@@ -796,20 +849,21 @@ def analyzeGame(index):
     # return np_x, np_y
     return pd_x, pd_y
     
-# gamesToAnalyze = 1000
-# train(model, gamesToAnalyze)
+gamesToAnalyze = 1000
+train(model, gamesToAnalyze)
 
 import pickle
 
-# # Save the model to a file
-# with open('model.pkl', 'wb') as f:
-#     pickle.dump(model, f)
+# Save the model to a file
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
 
 # To load the model later:
 # with open('model.pkl', 'rb') as f:
 #     model = pickle.load(f)
 
 lambdaVal = 0
+maxDepth = 2
 
 while running:
     # poll for events
@@ -862,23 +916,23 @@ while running:
 
         startingTimestamp = time.time()
 
-        eval, move = minimax(boardList, 1, -math.inf, math.inf, 'b')
+        # eval, move = minimax(boardList, maxDepth, -math.inf, math.inf, 'b', [], [])
 
-        # confidence, evalInf, moveInf = inference(boardList, 'b')
+        confidence, evalInf, moveInf = inference(boardList, 'b')
 
-        # evalInf *= lambdaVal
+        evalInf *= lambdaVal
 
         # print(f'confidence : {confidence}, evalInf : {evalInf}, evalMini : {eval}')
 
         # if confidence > 0.03:
-        #     print("inference move")
-        #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
-        #           boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+        print("inference move")
+        movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+                boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
         # else:
         #     # if abs(eval) > abs(evalInf):
         # print("minimax move")
-        movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
-            boardList[move.y][move.x].typeOfPiece, 'b')
+        # movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+        #     boardList[move.y][move.x].typeOfPiece, 'b')
             # else:
             #     print("inference move")
             #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
@@ -887,7 +941,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        print(f'Turn number : {turnNumber}. Eval : {eval}. Move time : {time.time()-startingTimestamp}. Calls : {calls}')
+        print(f'Turn number : {turnNumber}. Eval : {evalInf}. Move time : {time.time()-startingTimestamp}. Calls : {calls}')
 
     rendering() 
 
