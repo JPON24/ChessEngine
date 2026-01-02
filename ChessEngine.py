@@ -735,10 +735,13 @@ def inference(boardList, color):
     maxProb = 0
     maxLogit = 0
 
+    if (len(possibleMoves) == 0):
+        return '','','',False
+
     for i, move in enumerate(possibleMoves):
         inputFeatures = []
         inputFeatures += [isWhite % 2,
-                            evaluate(flattenedBoard, possibleMovesB, possibleMovesW, True),
+                            evaluate(boardList, possibleMovesB, possibleMovesW),
                             move.x,
                             move.y,
                             move.tgtX,
@@ -750,22 +753,26 @@ def inference(boardList, color):
 
         x = pd.DataFrame(inputFeatures)
 
-        probability = model.predict_proba(x.T)[0, 1]
-        rawLogit = model.decision_function(x.T)
+        scaler = preprocessing.StandardScaler().fit(x.T)
+
+        x_scaled = scaler.transform(x.T)
+
+        probability = model.predict_proba(x_scaled)[0, 1]
+        rawLogit = model.decision_function(x_scaled)
 
         if probability > maxProb:
             maxProb = probability
             bestMove = move
             maxLogit = rawLogit
 
-    return maxProb, maxLogit, bestMove
+    return maxProb, maxLogit, bestMove, True
 
 def train(model, gamesToAnalyze):
     for i in range(min(len(pgn.gameList), gamesToAnalyze)):
         x_train, y_train = analyzeGame(i)
         trainGame(model, x_train, y_train)
 
-gamesTrained = 10
+gamesTrained = 0
 
 def trainGame(model, x_train, y_train):
     global gamesTrained
@@ -822,6 +829,10 @@ def analyzeGame(index):
         yOut = []
 
         pieces = []
+        
+        if( len(possibleMoves) == 0 or len(possibleMovesOther) == 0):
+            continue
+        
         for i in possibleMoves:
             pieces.append([boardList[i.y][i.x].typeOfPiece]) 
 
@@ -892,7 +903,7 @@ def analyzeGame(index):
 
     return pd_x, pd_y
     
-gamesToAnalyze = 1
+gamesToAnalyze = 10
 train(model, gamesToAnalyze)
 
 import pickle
@@ -955,31 +966,23 @@ while running:
         #     movePiece(boardList,turnNumber-8,1,
         #                         turnNumber-8,2,boardList[1][turnNumber-8].typeOfPiece,'b') 
 
-        # add checking into legal moves, remove whatever the hell a king trade is lol
-
         startingTimestamp = time.time()
 
-        # eval, move = minimax(boardList, maxDepth, -math.inf, math.inf, 'b', [], [])
-
-        confidence, evalInf, moveInf = inference(boardList, 'b')
+        confidence, evalInf, moveInf, valid = inference(boardList, 'b')
 
         evalInf *= lambdaVal
 
         # print(f'confidence : {confidence}, evalInf : {evalInf}, evalMini : {eval}')
 
-        # if confidence > 0.03:
-        print("inference move")
-        movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
-                boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
-        # else:
-        #     # if abs(eval) > abs(evalInf):
-        # print("minimax move")
-        # movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
-        #     boardList[move.y][move.x].typeOfPiece, 'b')
-            # else:
-            #     print("inference move")
-            #     movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
-            #         boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+        if valid:
+            print("inference move")
+            movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+                    boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+        else:
+            eval, move = minimax(boardList, maxDepth, -math.inf, math.inf, 'b', [], [])
+            print("minimax move")
+            movePiece(boardList, move.x, move.y, move.tgtX, move.tgtY, 
+                boardList[move.y][move.x].typeOfPiece, 'b')
 
         playerTurn = True
         turnNumber += 1
