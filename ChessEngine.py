@@ -768,9 +768,15 @@ def inference(boardList, color):
     return maxProb, maxLogit, bestMove, True
 
 def train(model, gamesToAnalyze):
+    testX = []
+    testY = []
     for i in range(min(len(pgn.gameList), gamesToAnalyze)):
         x_train, y_train = analyzeGame(i)
-        trainGame(model, x_train, y_train)
+        tempX, tempY = trainGame(model, x_train, y_train)
+        testX.append(tempX)
+        testY.append(tempY)
+    
+    return testX, testY
 
 gamesTrained = 0
 
@@ -782,10 +788,11 @@ def trainGame(model, x_train, y_train):
     scaler = preprocessing.StandardScaler().fit(x_train)
     
     x_scaled = scaler.transform(x_train)
+    
+    xTrain, xTest, yTrain, yTest = train_test_split(x_scaled, y_train, test_size=0.2, random_state=42)
 
-    # xTrain, yTrain, xTest, yTest = train_test_split(x_scaled, y_train, test_size=0.2, random_state=42)
-
-    model.fit(x_scaled, y_train)
+    model.fit(xTrain, yTrain)
+    return xTest, yTest
 
 def analyzeGame(index): 
     newOrdinal = OrdinalEncoder()
@@ -903,8 +910,30 @@ def analyzeGame(index):
 
     return pd_x, pd_y
     
-gamesToAnalyze = 10
-train(model, gamesToAnalyze)
+gamesToAnalyze = 2
+testingDataX, testingDataY = train(model, gamesToAnalyze)
+
+import matplotlib.pyplot as plt 
+
+# def drawTestingGraphs(model, testingDataX, testingDataY):
+#     k_output = []
+#     for i in range(len(testingDataY)):
+#         k_ordered = [0]
+#         for j in range(len(testingDataX)[i]) / 135:
+#             dataSlice = testingDataX[i][j*135:(j*135)+135]
+
+#             probability = model.predict_proba(dataSlice)[0, 1]
+            
+#             k_ordered.append((probability,j))
+        
+#         k_ordered.sort()
+
+
+#     plt.plot(testingDataX[i], testingDataY[i])
+#     plt.show()
+#     plt.clf()
+
+# drawTestingGraphs(model, testingDataX, testingDataY)
 
 import pickle
 
