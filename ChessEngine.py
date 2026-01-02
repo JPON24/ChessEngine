@@ -666,6 +666,8 @@ import PGNReader as pgn
 
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.linear_model import LogisticRegression
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 
 model = LogisticRegression()
 
@@ -726,7 +728,13 @@ def trainGame(model, x_train, y_train):
     gamesTrained += 1
     print(gamesTrained)
 
-    model.fit(x_train, y_train)
+    scaler = preprocessing.StandardScaler().fit(x_train)
+    
+    x_scaled = scaler.transform(x_train)
+
+    # xTrain, yTrain, xTest, yTest = train_test_split(x_scaled, y_train, test_size=0.2, random_state=42)
+
+    model.fit(x_scaled, y_train)
 
 def analyzeGame(index): 
     newOrdinal = OrdinalEncoder()
@@ -766,12 +774,15 @@ def analyzeGame(index):
             possibleMovesW = possibleMovesOther
             possibleMovesB = possibleMoves
 
-        xOut = pd.DataFrame([])
+        xOut = ''
         yOut = []
 
         pieces = []
         for i in possibleMoves:
             pieces.append([boardList[i.y][i.x].typeOfPiece]) 
+
+
+        # candidates = possibleMoves[:min(len(possibleMoves),20)]
 
         piecesConverted = newOrdinal.transform(pieces)
 
@@ -798,6 +809,9 @@ def analyzeGame(index):
 
         flattenedBoardPieces = newOrdinal.transform(boardPieces)
 
+        # print(flattenedBoardPieces.T[0].tolist())
+        # print(flattenedBoardColors)
+
         for i, pos in enumerate(possibleMoves):
             inputFeatures = []
             inputFeatures += [isWhite % 2,
@@ -806,50 +820,38 @@ def analyzeGame(index):
                               pos.y,
                               pos.tgtX,
                               pos.tgtY,
-                              piecesConverted[i]]
+                              piecesConverted[i][0]]
             
-            # inputFeatures += flattenedBoardPieces
+            inputFeatures += flattenedBoardPieces.T[0].tolist()
             inputFeatures += flattenedBoardColors
 
             x = pd.DataFrame(inputFeatures)
-            # x = pd.DataFrame({
-            #     "isWhite": isWhite % 2,
-            #     "eval": evaluate(flattenedBoard, possibleMovesB, possibleMovesW, True),
-            #     "boardPieces":flattenedBoardPieces,
-            #     "boardColors":flattenedBoardColors,
-            #     "x" : pos.x,
-            #     "y" : pos.y,
-            #     "tgtX" : pos.tgtX,
-            #     "tgtY" : pos.tgtY,
-            #     "piece" :  piecesConverted[i]
-            # })
+
+            if type(xOut) != pd.DataFrame:
+                xOut = x.T
+            else:
+                xOut = pd.concat([xOut, x.T], axis=0)
 
             y = 0
 
             if (move.x == pos.x and move.y == pos.y and 
             move.tgtX == pos.tgtX and move.tgtY == pos.tgtY):
                 y = 1
-            
-            xOut = pd.concat([xOut,x])
+
             yOut.append(y)
 
         movePiece(boardList,move.x,move.y,move.tgtX,move.tgtY,boardList[move.y][move.x].typeOfPiece,color)
         isWhite += 1
 
-        x_train = pd.concat([x_train, xOut])
+        x_train = pd.concat([x_train, xOut], axis=0)
         y_train.extend(yOut)
 
     pd_x = x_train
     pd_y = y_train
 
-    # np_x = np.array(x_train)
-    # np_x = np_x.reshape(np_x.shape[0], -1)
-    
-    # np_y = np.array(y_train)
-    # return np_x, np_y
     return pd_x, pd_y
     
-gamesToAnalyze = 1000
+gamesToAnalyze = 1
 train(model, gamesToAnalyze)
 
 import pickle
