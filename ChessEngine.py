@@ -789,7 +789,7 @@ def train(model, gamesToAnalyze):
             yPredSortedSlice = yPredSortedSlice[::-1]
             tempYSlice = tempY[listOffset:listOffset+numMovesPerPosition[j+1]]
 
-            for k in range(min(10,len(yPredSortedSlice))):
+            for k in range(min(3,len(yPredSortedSlice))):
                 if yPredSlice.index(yPredSortedSlice[k]) == np.argmax(tempYSlice): 
                     k_pred_arr.append(k+1)
                     found = True
@@ -931,10 +931,16 @@ def analyzeGame(index):
 
     return pd_x, pd_y, numMovesPerPosition
     
-gamesToAnalyze = 1
+gamesToAnalyze = 1000
 k_pred_arr = train(model, gamesToAnalyze)
 
 import matplotlib.pyplot as plt 
+
+import pickle
+
+# Save the model to a file
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
 
 def drawTestingGraphs(yData):
     x_data = np.arange(0, len(yData))
@@ -944,12 +950,6 @@ def drawTestingGraphs(yData):
     plt.clf()
 
 drawTestingGraphs(k_pred_arr)
-
-import pickle
-
-# Save the model to a file
-with open('model.pkl', 'wb') as f:
-    pickle.dump(model, f)
 
 # To load the model later:
 # with open('model.pkl', 'rb') as f:
