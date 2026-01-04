@@ -665,13 +665,16 @@ import pandas as pd
 import PGNReader as pgn
 
 from sklearn.preprocessing import OrdinalEncoder
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import SGDClassifier
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-model = LogisticRegression(solver='lbfgs', warm_start=True)
+# model = LogisticRegression(solver='lbfgs', warm_start=True)
+classes = np.array([0, 1])
+model = SGDClassifier(loss='log_loss', random_state=42)
 
 def inference(boardList, color):
+    global scaler
     newOrdinal = OrdinalEncoder()
     categories = [
         ['p'],['n'],['b'],['r'],['k'],['q'],['-']
@@ -755,10 +758,10 @@ def inference(boardList, color):
 
         # scaler = preprocessing.StandardScaler().fit(x.T)
 
-        # x_scaled = scaler.transform(x.T)
+        x_scaled = scaler.transform(x.T)
 
-        probability = model.predict_proba(x)[0, 1]
-        rawLogit = model.decision_function(x)
+        probability = model.predict_proba(x_scaled)[0, 1]
+        rawLogit = model.decision_function(x_scaled)
 
         if probability > maxProb:
             maxProb = probability
@@ -806,6 +809,7 @@ scaler = ''
 def trainGame(model, x_train, y_train):
     global scaler
     global gamesTrained
+    global classes
     gamesTrained += 1
     print(gamesTrained)
 
@@ -816,7 +820,7 @@ def trainGame(model, x_train, y_train):
     
     xTrain, xTest, yTrain, yTest = train_test_split(x_scaled, y_train, test_size=0.1, random_state=42, shuffle=False)
 
-    model.fit(xTrain, yTrain)
+    model.partial_fit(xTrain, yTrain, classes=classes)
     return xTest, yTest
 
 def analyzeGame(index): 
@@ -935,16 +939,20 @@ def analyzeGame(index):
 
     return pd_x, pd_y, numMovesPerPosition
     
-gamesToAnalyze = 100
-k_pred_arr = train(model, gamesToAnalyze)
+gamesToAnalyze = 1000
+# k_pred_arr = train(model, gamesToAnalyze)
 
 import matplotlib.pyplot as plt 
 
 import pickle
 
-# Save the model to a file
-with open('model.pkl', 'wb') as f:
-    pickle.dump(model, f)
+# # Save the model to a file
+# with open('model.pkl', 'wb') as f:
+#     pickle.dump(model, f)
+
+# # save
+# with open("scaler.pkl", "wb") as f:
+#     pickle.dump(scaler, f)
 
 def drawTestingGraphs(yData):
     x_data = np.arange(0, len(yData))
@@ -953,11 +961,13 @@ def drawTestingGraphs(yData):
     plt.show()
     plt.clf()
 
-drawTestingGraphs(k_pred_arr)
+# drawTestingGraphs(k_pred_arr)
 
-# To load the model later:
-# with open('model.pkl', 'rb') as f:
-#     model = pickle.load(f)
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 
 lambdaVal = 0
 maxDepth = 2
