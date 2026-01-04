@@ -767,16 +767,37 @@ def inference(boardList, color):
 
     return maxProb, maxLogit, bestMove, True
 
+k_pred_arr = []
+
 def train(model, gamesToAnalyze):
-    testX = []
-    testY = []
     for i in range(min(len(pgn.gameList), gamesToAnalyze)):
-        x_train, y_train = analyzeGame(i)
+        x_train, y_train, numMovesPerPosition = analyzeGame(i)
         tempX, tempY = trainGame(model, x_train, y_train)
-        testX.append(tempX)
-        testY.append(tempY)
-    
-    return testX, testY
+
+        yPred = []
+        for j in range(tempX.shape[0]):
+            value = model.predict_proba(tempX[j:j+1])[0, 1]
+            yPred.append(value)
+
+        numMovesPerPosition.append(0)
+        for j in range(len(numMovesPerPosition) - 1):
+            listOffset = sum(numMovesPerPosition[:j]) 
+            found = False
+            yPredSlice = yPred[listOffset:listOffset+numMovesPerPosition[j+1]]
+            yPredSortedSlice = copy.deepcopy(yPredSlice)
+            yPredSortedSlice.sort()
+            yPredSortedSlice = yPredSortedSlice[::-1]
+            tempYSlice = tempY[listOffset:listOffset+numMovesPerPosition[j+1]]
+
+            for k in range(min(10,len(yPredSortedSlice))):
+                if yPredSlice.index(yPredSortedSlice[k]) == np.argmax(tempYSlice): 
+                    k_pred_arr.append(k+1)
+                    found = True
+                    break
+
+            if not found:
+                k_pred_arr.append(0)
+    return k_pred_arr
 
 gamesTrained = 0
 
@@ -789,7 +810,7 @@ def trainGame(model, x_train, y_train):
     
     x_scaled = scaler.transform(x_train)
     
-    xTrain, xTest, yTrain, yTest = train_test_split(x_scaled, y_train, test_size=0.2, random_state=42)
+    xTrain, xTest, yTrain, yTest = train_test_split(x_scaled, y_train, test_size=0.1, random_state=42, shuffle=False)
 
     model.fit(xTrain, yTrain)
     return xTest, yTest
@@ -810,6 +831,7 @@ def analyzeGame(index):
 
     x_train = pd.DataFrame([])
     y_train = []
+    numMovesPerPosition = []
 
     for move in moves:
         if isWhite%2 == 1:
@@ -868,8 +890,7 @@ def analyzeGame(index):
 
         flattenedBoardPieces = newOrdinal.transform(boardPieces)
 
-        # print(flattenedBoardPieces.T[0].tolist())
-        # print(flattenedBoardColors)
+        numMovesPerPosition.append(len(possibleMoves))
 
         for i, pos in enumerate(possibleMoves):
             inputFeatures = []
@@ -908,32 +929,21 @@ def analyzeGame(index):
     pd_x = x_train
     pd_y = y_train
 
-    return pd_x, pd_y
+    return pd_x, pd_y, numMovesPerPosition
     
-gamesToAnalyze = 2
-testingDataX, testingDataY = train(model, gamesToAnalyze)
+gamesToAnalyze = 1
+k_pred_arr = train(model, gamesToAnalyze)
 
 import matplotlib.pyplot as plt 
 
-# def drawTestingGraphs(model, testingDataX, testingDataY):
-#     k_output = []
-#     for i in range(len(testingDataY)):
-#         k_ordered = [0]
-#         for j in range(len(testingDataX)[i]) / 135:
-#             dataSlice = testingDataX[i][j*135:(j*135)+135]
+def drawTestingGraphs(yData):
+    x_data = np.arange(0, len(yData))
 
-#             probability = model.predict_proba(dataSlice)[0, 1]
-            
-#             k_ordered.append((probability,j))
-        
-#         k_ordered.sort()
+    plt.plot(x_data, yData)
+    plt.show()
+    plt.clf()
 
-
-#     plt.plot(testingDataX[i], testingDataY[i])
-#     plt.show()
-#     plt.clf()
-
-# drawTestingGraphs(model, testingDataX, testingDataY)
+drawTestingGraphs(k_pred_arr)
 
 import pickle
 
