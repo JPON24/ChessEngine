@@ -669,7 +669,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-model = LogisticRegression()
+model = LogisticRegression(solver='lbfgs', warm_start=True)
 
 def inference(boardList, color):
     newOrdinal = OrdinalEncoder()
@@ -753,12 +753,12 @@ def inference(boardList, color):
 
         x = pd.DataFrame(inputFeatures)
 
-        scaler = preprocessing.StandardScaler().fit(x.T)
+        # scaler = preprocessing.StandardScaler().fit(x.T)
 
-        x_scaled = scaler.transform(x.T)
+        # x_scaled = scaler.transform(x.T)
 
-        probability = model.predict_proba(x_scaled)[0, 1]
-        rawLogit = model.decision_function(x_scaled)
+        probability = model.predict_proba(x)[0, 1]
+        rawLogit = model.decision_function(x)
 
         if probability > maxProb:
             maxProb = probability
@@ -801,12 +801,16 @@ def train(model, gamesToAnalyze):
 
 gamesTrained = 0
 
+scaler = ''
+
 def trainGame(model, x_train, y_train):
+    global scaler
     global gamesTrained
     gamesTrained += 1
     print(gamesTrained)
 
-    scaler = preprocessing.StandardScaler().fit(x_train)
+    if type(scaler) == str:
+        scaler = preprocessing.StandardScaler().fit(x_train)
     
     x_scaled = scaler.transform(x_train)
     
@@ -931,7 +935,7 @@ def analyzeGame(index):
 
     return pd_x, pd_y, numMovesPerPosition
     
-gamesToAnalyze = 1000
+gamesToAnalyze = 100
 k_pred_arr = train(model, gamesToAnalyze)
 
 import matplotlib.pyplot as plt 
