@@ -172,7 +172,7 @@ def selectSquare(x,y):
 
 calls = 0
 
-def calculatePossibleMoves(boardList, x, y, check):
+def calculatePossibleMoves(boardList, x, y):
     global calls
 
     calls += 1
@@ -197,26 +197,42 @@ def calculatePossibleMoves(boardList, x, y, check):
             positions.append((x,y+1))
             if x+1 <= 7 and y+1 <= 7:
                 if boardList[y+1][x+1].color == 'w':
-                    validMoves.append(Move(x, y, x+1, y+1))
+                    if boardList[y+1][x-1].typeOfPiece == 'k':
+                        validMoves.append(Move(x, y, x-1, y+1, True))
+                    else:
+                        validMoves.append(Move(x, y, x-1, y+1))
             if x-1 >= 0 and y+1 <= 7:
                 if boardList[y+1][x-1].color == 'w':
-                    validMoves.append(Move(x, y, x-1, y+1))
+                    if boardList[y+1][x-1].typeOfPiece == 'k':
+                        validMoves.append(Move(x, y, x-1, y+1, True))
+                    else:
+                        validMoves.append(Move(x, y, x-1, y+1))
 
         elif color == 'w':
             positions.append((x,y-1))
             if x+1 <= 7 and y-1 >= 0:
                 if boardList[y-1][x+1].color == 'b':
-                    validMoves.append(Move(x, y, x+1, y-1))
+                    if boardList[y-1][x+1].typeOfPiece == 'k':
+                        validMoves.append(Move(x, y, x+1, y-1, True))
+                    else:
+                        validMoves.append(Move(x, y, x+1, y-1))
+
             if x-1 >= 0 and y-1 >= 0:
                 if boardList[y-1][x-1].color == 'b':
-                    validMoves.append(Move(x,y,x-1, y-1))
+                    if boardList[y-1][x-1].typeOfPiece == 'k':
+                        validMoves.append(Move(x, y, x-1, y-1, True))
+                    else:
+                        validMoves.append(Move(x, y, x-1, y-1))
 
         for i in positions:
-            if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
-                continue
+            # if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
+            #     continue
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 continue
-            validMoves.append(Move(x, y, i[0], i[1]))
+            if boardList[i[1]][i[0]].typeOfPiece == 'k' and boardList[i[1]][i[0]].color != color:
+                validMoves.append(Move(x, y, i[0], i[1], True))
+            else:
+                validMoves.append(Move(x, y, i[0], i[1]))
     
     if piece == 'n':
         positions = []
@@ -236,6 +252,9 @@ def calculatePossibleMoves(boardList, x, y, check):
                 continue
             if boardList[i[1]][i[0]].typeOfPiece != '-':
                 if boardList[i[1]][i[0]].color != color:
+                    if boardList[i[1]][i[0]].typeOfPiece == 'k':
+                        validMoves.append(Move(x, y, i[0], i[1], True))
+                        continue
                     validMoves.append(Move(x, y, i[0], i[1]))
                 continue 
             validMoves.append(Move(x, y, i[0], i[1]))
@@ -295,198 +314,326 @@ def calculatePossibleMoves(boardList, x, y, check):
     if piece == 'r':
         positions = []
 
+        canBeValid = True
         for i in range(1,8):
             if x + i > 7:
                 break
             if boardList[y][x+i].typeOfPiece != '-':
                 if (boardList[y][x+i].color != color):
-                    positions.append((x+i,y))
-                break
-            positions.append((x+i, y))
+                    if boardList[y][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y))
 
+        canBeValid = True
         for i in range(1,8):
             if x - i < 0:
                 break
             if boardList[y][x-i].typeOfPiece != '-':
                 if (boardList[y][x-i].color != color):
-                    positions.append((x-i,y))
-                break
-            positions.append((x-i, y))
+                    if boardList[y][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x-i,y))
 
+        canBeValid = True
         for i in range(1,8):
             if y + i > 7:
                 break
             if boardList[y+i][x].typeOfPiece != '-':
                 if (boardList[y+i][x].color != color):
-                    positions.append((x,y+i))
-                break
-            positions.append((x, y+i))
+                    if boardList[y+i][x].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if y - i < 0:
                 break
             if boardList[y-i][x].typeOfPiece != '-':
                 if (boardList[y-i][x].color != color):
-                    positions.append((x,y-i))
-                break
-            positions.append((x, y-i))
+                    if boardList[y-i][x].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y-i))
 
-        for i in positions:
-            if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
-                continue
-            validMoves.append(Move(x, y, i[0], i[1]))
+        # for i in positions:
+        #     if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
+        #         continue
+        #     validMoves.append(Move(x, y, i[0], i[1]))
 
     if piece == 'b':
         positions = []
 
+        canBeValid = True
         for i in range(1,8):
             if x + i > 7 or y + i > 7:
                 break
             if boardList[y+i][x+i].typeOfPiece != '-':
                 if (boardList[y+i][x+i].color != color):
-                    positions.append((x+i,y+i))
-                break
-            positions.append((x+i, y+i))
+                    if boardList[y+i][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if x - i < 0 or y - i < 0:
                 break
             if boardList[y-i][x-i].typeOfPiece != '-':
                 if (boardList[y-i][x-i].color != color):
-                    positions.append((x-i,y-i))
-                break
-            positions.append((x-i, y-i))
+                    if boardList[y-i][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x-i,y-i))
 
+        canBeValid = True
         for i in range(1,8):
             if y + i > 7 or x - i < 0:
                 break
             if boardList[y+i][x-i].typeOfPiece != '-':
                 if (boardList[y+i][x-i].color != color):
-                    positions.append((x-i,y+i))
-                break
-            positions.append((x-i, y+i))
+                    if boardList[y+i][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if y - i < 0 or x + i > 7:
                 break
             if boardList[y-i][x+i].typeOfPiece != '-':
                 if (boardList[y-i][x+i].color != color):
-                    positions.append((x+i,y-i))
-                break
-            positions.append((x+i, y-i))
+                    if boardList[y-i][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y-i))
 
-        for i in positions:
-            if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
-                continue
-            validMoves.append(Move(x, y, i[0], i[1]))
+        # for i in positions:
+        #     if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
+        #         continue
+        #     validMoves.append(Move(x, y, i[0], i[1]))
 
     if piece == 'q':
         positions = []
-
+  
+        canBeValid = True
         for i in range(1,8):
             if x + i > 7 or y + i > 7:
                 break
             if boardList[y+i][x+i].typeOfPiece != '-':
                 if (boardList[y+i][x+i].color != color):
-                    positions.append((x+i,y+i))
-                break
-            positions.append((x+i, y+i))
+                    if boardList[y+i][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if x - i < 0 or y - i < 0:
                 break
             if boardList[y-i][x-i].typeOfPiece != '-':
                 if (boardList[y-i][x-i].color != color):
-                    positions.append((x-i,y-i))
-                break
-            positions.append((x-i, y-i))
+                    if boardList[y-i][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x-i,y-i))
 
+        canBeValid = True
         for i in range(1,8):
             if y + i > 7 or x - i < 0:
                 break
             if boardList[y+i][x-i].typeOfPiece != '-':
                 if (boardList[y+i][x-i].color != color):
-                    positions.append((x-i,y+i))
-                break
-            positions.append((x-i, y+i))
+                    if boardList[y+i][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if y - i < 0 or x + i > 7:
                 break
             if boardList[y-i][x+i].typeOfPiece != '-':
                 if (boardList[y-i][x+i].color != color):
-                    positions.append((x+i,y-i))
-                break
-            positions.append((x+i, y-i))
-
+                    if boardList[y-i][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y-i))
+        
+        canBeValid = True
         for i in range(1,8):
             if x + i > 7:
                 break
             if boardList[y][x+i].typeOfPiece != '-':
                 if (boardList[y][x+i].color != color):
-                    positions.append((x+i,y))
-                break
-            positions.append((x+i, y))
+                    if boardList[y][x+i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x+i, y, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x+i, y, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x+i, y))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x+i,y))
 
+        canBeValid = True
         for i in range(1,8):
             if x - i < 0:
                 break
             if boardList[y][x-i].typeOfPiece != '-':
                 if (boardList[y][x-i].color != color):
-                    positions.append((x-i,y))
-                break
-            positions.append((x-i, y))
+                    if boardList[y][x-i].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x-i, y, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x-i, y, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x-i, y))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x-i,y))
 
+        canBeValid = True
         for i in range(1,8):
             if y + i > 7:
                 break
             if boardList[y+i][x].typeOfPiece != '-':
                 if (boardList[y+i][x].color != color):
-                    positions.append((x,y+i))
-                break
-            positions.append((x, y+i))
+                    if boardList[y+i][x].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x, y+i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x, y+i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x, y+i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y+i))
 
+        canBeValid = True
         for i in range(1,8):
             if y - i < 0:
                 break
             if boardList[y-i][x].typeOfPiece != '-':
                 if (boardList[y-i][x].color != color):
-                    positions.append((x,y-i))
-                break
-            positions.append((x, y-i))
+                    if boardList[y-i][x].typeOfPiece == 'k':
+                        if not canBeValid:
+                            validMoves.append(Move(x, y, x, y-i, False, True))
+                        else:
+                            validMoves.append(Move(x, y, x, y-i, True, False))
+                    else: 
+                        validMoves.append(Move(x, y, x, y-i))
+                canBeValid = False
+            if canBeValid:
+                validMoves.append(Move(x,y,x, y-i))
 
-        for i in positions:
-            if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
-                continue
-            validMoves.append(Move(x, y, i[0], i[1]))
+        # for i in positions:
+        #     if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
+        #         continue
+        #     validMoves.append(Move(x, y, i[0], i[1]))
     
-    out = []
 
-    if check:
-        for move in validMoves:
-            copiedBoard = copy.deepcopy(boardList)
+    # instead of using a search tree, just look at the moves that are possible for one side and check if any of the squares in their possible moves.typeOfPiece == 'k' and color != the color that is thinking about the move
+    # if check:
+    #     for move in validMoves:
+    #         copiedBoard = copy.deepcopy(boardList)
 
-            movePiece(copiedBoard, move.x, move.y, move.tgtX, move.tgtY, 
-                                copiedBoard[move.y][move.x].typeOfPiece, copiedBoard[move.y][move.x].color)
+    #         movePiece(copiedBoard, move.x, move.y, move.tgtX, move.tgtY, 
+    #                             copiedBoard[move.y][move.x].typeOfPiece, copiedBoard[move.y][move.x].color)
 
-            legalMovesOther = ''
-            color = copiedBoard[move.tgtY][move.tgtX].color
+    #         legalMovesOther = ''
+    #         color = copiedBoard[move.tgtY][move.tgtX].color
 
-            if color == 'w':
-                legalMovesOther = getLegalMoves(copiedBoard, 'b', False, validMoves)
-            elif color == 'b':
-                legalMovesOther = getLegalMoves(copiedBoard, 'w', False, validMoves)
+    #         if color == 'w':
+    #             legalMovesOther = getLegalMoves(copiedBoard, 'b', False, validMoves)
+    #         elif color == 'b':
+    #             legalMovesOther = getLegalMoves(copiedBoard, 'w', False, validMoves)
 
-            illegal = False
-            for i in legalMovesOther:
-                if copiedBoard[i.tgtY][i.tgtX].typeOfPiece == 'k' and copiedBoard[i.tgtY][i.tgtX].color == color:
-                    illegal = True
-                    break
+    #         illegal = False
+    #         for i in legalMovesOther:
+    #             if copiedBoard[i.tgtY][i.tgtX].typeOfPiece == 'k' and copiedBoard[i.tgtY][i.tgtX].color == color:
+    #                 illegal = True
+    #                 break
 
-            if not illegal:
-                out.append(move)
+    #         if not illegal:
+    #             out.append(move)
 
-        return out
+    #     return out
     return validMoves
 
 def movePiece(board,x,y,tgtX,tgtY,piece,color):
@@ -529,7 +676,7 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
 
     promote(board)
 
-def getLegalMoves(board, color, check, legalMovesPrev=[]):
+def getLegalMoves(board, color, legalMovesPrev=[]):
     legalMoves = []
     
     for r in range(8):
@@ -538,12 +685,12 @@ def getLegalMoves(board, color, check, legalMovesPrev=[]):
                 continue
 
             if (board[c][r].color == color):
-                legalMoves.extend(calculatePossibleMoves(board, r, c, check))
+                legalMoves.extend(calculatePossibleMoves(board, r, c))
 
     return legalMoves
 
 def checkGameOver(board, color):
-    if len(getLegalMoves(board,color,True)) == 0:
+    if len(getLegalMoves(board,color)) == 0:
         return True
 
     return False
@@ -602,6 +749,9 @@ def promote(board):
         if board[7][i].typeOfPiece == 'p':
             board[7][i].typeOfPiece = 'q'
 
+# if the move is a check, then double check after search tree move. Only look at the pieces that were previously a pin or a check
+# could maybe do a check for if an attack is within king moveable - safe vs attacked squares
+
 def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
     global maxDepth
     if checkGameOver(board, color) or depth == 0:
@@ -609,7 +759,7 @@ def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
 
     if color == 'w':
         maxEval = -math.inf
-        possibleMoves = getLegalMoves(board, 'w', True)
+        possibleMoves = getLegalMoves(board, 'w')
         possibleMovesW = possibleMoves
         bestMove = ''
 
@@ -629,7 +779,7 @@ def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
         return maxEval, bestMove
     else:
         minEval = math.inf
-        possibleMoves = getLegalMoves(board, 'b', True)
+        possibleMoves = getLegalMoves(board, 'b')
         possibleMovesB = possibleMoves
         bestMove = ''
 
@@ -692,8 +842,8 @@ def inference(boardList, color):
         colorOther = 'w'
         isWhite = 0
 
-    possibleMoves = getLegalMoves(boardList, color, True)
-    possibleMovesOther = getLegalMoves(boardList, colorOther, True)
+    possibleMoves = getLegalMoves(boardList, color)
+    possibleMovesOther = getLegalMoves(boardList, colorOther)
 
     possibleMovesW = ''
     possibleMovesB = ''
@@ -849,8 +999,8 @@ def analyzeGame(index):
             color = 'b'
             colorOther = 'w'
 
-        possibleMoves = getLegalMoves(boardList, color, True)
-        possibleMovesOther = getLegalMoves(boardList, colorOther, True)
+        possibleMoves = getLegalMoves(boardList, color)
+        possibleMovesOther = getLegalMoves(boardList, colorOther)
 
         possibleMovesW = ''
         possibleMovesB = ''
@@ -996,7 +1146,7 @@ while running:
                 # for x in validMoves:
                 #     print(x)      
             else:
-                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY, True)
+                validMoves = calculatePossibleMoves(boardList, selectedPieceX, selectedPieceY)
                 
                 unpacked = []
                 for i in validMoves:

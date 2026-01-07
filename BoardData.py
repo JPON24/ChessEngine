@@ -21,18 +21,21 @@ class Move:
     y = 0
     tgtX = 0
     tgtY = 0
+    isCheck = False
 
-    def __init__(self, x, y, tgtX, tgtY):
+    def __init__(self, x, y, tgtX, tgtY, isCheck=False, pinned=False):
         self.x = x
         self.y = y
         self.tgtX = tgtX
         self.tgtY = tgtY
+        self.isCheck = isCheck
+        self.pinned = pinned
 
     def unpack(self):
         return self.x,self.y,self.tgtX,self.tgtY
     
     def __str__(self):
-        return f"x : {self.x}, y : {self.y}, tgtX : {self.tgtX}, tgtY : {self.tgtY}"
+        return f"x : {self.x}, y : {self.y}, tgtX : {self.tgtX}, tgtY : {self.tgtY}, isCheck = {self.check}, isPin = {self.pinned}"
     
 class evalObj:
     eval = 0
