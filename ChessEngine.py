@@ -237,6 +237,13 @@ def calculatePossibleMoves(boardList, x, y):
                 if boardList[y+1][x-1].color == 'w':
                     if boardList[y+1][x-1].typeOfPiece == 'k':
                         validMoves.append(Move(x, y, x-1, y+1, True))
+
+                        isNextToKing = True
+                        if isNextToKing:
+                            if color == 'b':
+                                dangerSquaresW.append((x-1,y+1))
+                            if color == 'w':
+                                dangerSquaresB.append((x-1,y+1))
                     else:
                         validMoves.append(Move(x, y, x-1, y+1))
 
@@ -255,10 +262,11 @@ def calculatePossibleMoves(boardList, x, y):
                         validMoves.append(Move(x, y, x-1, y-1, True))
 
                         isNextToKing = True
-                        if color == 'b':
-                            dangerSquaresW.append((x-1,y-1))
-                        if color == 'w':
-                            dangerSquaresB.append((x-1,y-1))
+                        if isNextToKing:
+                            if color == 'b':
+                                dangerSquaresW.append((x-1,y-1))
+                            if color == 'w':
+                                dangerSquaresB.append((x-1,y-1))
                     else:
                         validMoves.append(Move(x, y, x-1, y-1))
 
@@ -315,23 +323,28 @@ def calculatePossibleMoves(boardList, x, y):
             validMoves.append(Move(x, y, i[0], i[1]))
 
     if piece == 'k':
+        tempPositions = []
         positions = []
     
-        positions.append((x+1,y+1))
-        positions.append((x+1,y-1))
-        positions.append((x-1,y-1))
-        positions.append((x-1,y+1))
+        tempPositions.append((x+1,y+1))
+        tempPositions.append((x+1,y-1))
+        tempPositions.append((x-1,y-1))
+        tempPositions.append((x-1,y+1))
 
-        positions.append((x+1,y))
-        positions.append((x-1,y))
-        positions.append((x,y+1))
-        positions.append((x,y-1))
+        tempPositions.append((x+1,y))
+        tempPositions.append((x-1,y))
+        tempPositions.append((x,y+1))
+        tempPositions.append((x,y-1))
+
         
         if color == 'b':
-            
-            pass
+            for j in range(8):
+                if tempPositions[j] not in dangerSquaresB:
+                    positions.append(tempPositions[j])
         elif color == 'w':
-            pass
+            for j in range(8):
+                if tempPositions[j] not in dangerSquaresW:
+                    positions.append(tempPositions[j])
 
         for i in positions:
             if i[0] > 7 or i[0] < 0 or i[1] > 7 or i[1] < 0:
@@ -383,7 +396,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y][x+i].color != color):
                     if boardList[y][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y, False, True))
+                            validMoves.append(Move(x, y, x+i, y, False, True, False))
                         else:
                             validMoves.append(Move(x, y, x+i, y, True, False))
                     if canBeValid:
@@ -405,7 +418,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y][x-i].color != color):
                     if boardList[y][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y, False, True))
+                            validMoves.append(Move(x, y, x-i, y, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y, True, False))
@@ -428,7 +441,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x].color != color):
                     if boardList[y+i][x].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x, y+i, False, True))
+                            validMoves.append(Move(x, y, x, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x, y+i, True, False))
@@ -451,7 +464,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x].color != color):
                     if boardList[y-i][x].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x, y-i, False, True))
+                            validMoves.append(Move(x, y, x, y-i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x, y-i, True, False))
@@ -469,11 +482,14 @@ def calculatePossibleMoves(boardList, x, y):
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
                 continue
+            if not i.isValid:
+                continue
             isNextToKing= nextToKing(boardList,i.tgtX,i.tgtY, color)
-            if color == 'b':
-                dangerSquaresW.append((i.tgtX,i.tgtY))
-            if color == 'w':
-                dangerSquaresB.append((i.tgtX,i.tgtY))
+            if isNextToKing:
+                if color == 'b':
+                    dangerSquaresW.append((i.tgtX,i.tgtY))
+                if color == 'w':
+                    dangerSquaresB.append((i.tgtX,i.tgtY))
 
 
     if piece == 'b':
@@ -487,7 +503,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x+i].color != color):
                     if boardList[y+i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y+i, False, True))
+                            validMoves.append(Move(x, y, x+i, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x+i, y+i, True, False))
@@ -510,7 +526,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x-i].color != color):
                     if boardList[y-i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y-i, False, True))
+                            validMoves.append(Move(x, y, x-i, y-i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y-i, True, False))
@@ -533,7 +549,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x-i].color != color):
                     if boardList[y+i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y+i, False, True))
+                            validMoves.append(Move(x, y, x-i, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y+i, True, False))
@@ -556,7 +572,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x+i].color != color):
                     if boardList[y-i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y-i, False, True))
+                            validMoves.append(Move(x, y, x+i, y-i, False, True, False))
                         else:
                             validMoves.append(Move(x, y, x+i, y-i, True, False))
                     if canBeValid:
@@ -573,13 +589,15 @@ def calculatePossibleMoves(boardList, x, y):
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
                 continue
-            
+            if not i.isValid:
+                continue
             isNextToKing= nextToKing(boardList,i.tgtX,i.tgtY, color)
             
-            if color == 'b':
-                dangerSquaresW.append((i.tgtX,i.tgtY))
-            if color == 'w':
-                dangerSquaresB.append((i.tgtX,i.tgtY))
+            if isNextToKing:
+                if color == 'b':
+                    dangerSquaresW.append((i.tgtX,i.tgtY))
+                if color == 'w':
+                    dangerSquaresB.append((i.tgtX,i.tgtY))
 
     if piece == 'q':
         positions = []
@@ -592,7 +610,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x+i].color != color):
                     if boardList[y+i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y+i, False, True))
+                            validMoves.append(Move(x, y, x+i, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x+i, y+i, True, False))
@@ -615,7 +633,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x-i].color != color):
                     if boardList[y-i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y-i, False, True))
+                            validMoves.append(Move(x, y, x-i, y-i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y-i, True, False))
@@ -638,7 +656,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x-i].color != color):
                     if boardList[y+i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y+i, False, True))
+                            validMoves.append(Move(x, y, x-i, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y+i, True, False))
@@ -661,7 +679,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x+i].color != color):
                     if boardList[y-i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y-i, False, True))
+                            validMoves.append(Move(x, y, x+i, y-i, False, True, False))
                         else:
                             validMoves.append(Move(x, y, x+i, y-i, True, False))
                     if canBeValid:
@@ -683,7 +701,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y][x+i].color != color):
                     if boardList[y][x+i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x+i, y, False, True))
+                            validMoves.append(Move(x, y, x+i, y, False, True, False))
                         else:
                             validMoves.append(Move(x, y, x+i, y, True, False))
                     if canBeValid:
@@ -705,7 +723,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y][x-i].color != color):
                     if boardList[y][x-i].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x-i, y, False, True))
+                            validMoves.append(Move(x, y, x-i, y, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x-i, y, True, False))
@@ -728,7 +746,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y+i][x].color != color):
                     if boardList[y+i][x].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x, y+i, False, True))
+                            validMoves.append(Move(x, y, x, y+i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x, y+i, True, False))
@@ -751,7 +769,7 @@ def calculatePossibleMoves(boardList, x, y):
                 if (boardList[y-i][x].color != color):
                     if boardList[y-i][x].typeOfPiece == 'k':
                         if not canBeValid:
-                            validMoves.append(Move(x, y, x, y-i, False, True))
+                            validMoves.append(Move(x, y, x, y-i, False, True, False))
                             continue
                         else:
                             validMoves.append(Move(x, y, x, y-i, True, False))
@@ -769,11 +787,16 @@ def calculatePossibleMoves(boardList, x, y):
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
                 continue
+            if not i.isValid:
+                continue
+            
             isNextToKing= nextToKing(boardList,i.tgtX,i.tgtY, color)
-            if color == 'b':
-                dangerSquaresW.append((i.tgtX,i.tgtY))
-            if color == 'w':
-                dangerSquaresB.append((i.tgtX,i.tgtY))
+            
+            if isNextToKing:
+                if color == 'b':
+                    dangerSquaresW.append((i.tgtX,i.tgtY))
+                if color == 'w':
+                    dangerSquaresB.append((i.tgtX,i.tgtY))
     
 
     # instead of using a search tree, just look at the moves that are possible for one side and check if any of the squares in their possible moves.typeOfPiece == 'k' and color != the color that is thinking about the move
@@ -846,7 +869,11 @@ def movePiece(board,x,y,tgtX,tgtY,piece,color):
 
 def getLegalMoves(board, color, legalMovesPrev=[]):
     legalMoves = []
+    global dangerSquaresW, dangerSquaresB
     
+    dangerSquaresW.clear()
+    dangerSquaresB.clear()
+
     for r in range(8):
         for c in range(8):
             if (board[c][r].typeOfPiece == '-'):
@@ -998,7 +1025,7 @@ def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
             
         return minEval, bestMove
 
-material = {'p':100, 'n':300, 'b':310, 'r':500, 'q': 900, 'k':10000, '-':0}
+material = {'p':100, 'n':300, 'b':310, 'r':500, 'q': 900, 'k':100000, '-':0}
 
 selectedPieceX = -1
 selectedPieceY = -1
