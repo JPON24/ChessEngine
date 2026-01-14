@@ -22,6 +22,7 @@ class Move:
     tgtX = 0
     tgtY = 0
     isCheck = False
+    pinned = False
 
     def __init__(self, x, y, tgtX, tgtY, isCheck=False, pinned=False):
         self.x = x
@@ -33,6 +34,9 @@ class Move:
 
     def unpack(self):
         return self.x,self.y,self.tgtX,self.tgtY
+
+    def unpack_full(self):
+        return self.x,self.y,self.tgtX,self.tgtY,self.isCheck,self.pinned
     
     def __str__(self):
         return f"x : {self.x}, y : {self.y}, tgtX : {self.tgtX}, tgtY : {self.tgtY}, isCheck = {self.check}, isPin = {self.pinned}"
