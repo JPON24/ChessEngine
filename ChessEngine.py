@@ -387,7 +387,7 @@ def calculatePossibleMoves(boardList, x, y):
                         else:
                             validMoves.append(Move(x, y, x+i, y, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y))
+                        validMoves.append(Move(x, y, x+i, y, False, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -395,7 +395,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y))
             else: 
-                validMoves.append(Move(x, y, x+i, y, False, True))
+                validMoves.append(Move(x, y, x+i, y, False, True, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -406,18 +406,19 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y))
+                        validMoves.append(Move(x, y, x-i, y, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
                 
             if canBeValid:
-                validMoves.append(Move(x,y,x-i,y))
+                validMoves.append(Move(x,y,x-i, y))
             else: 
-                validMoves.append(Move(x, y, x-i, y, False, True))
+                validMoves.append(Move(x, y, x-i,y, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -428,10 +429,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x, y+i))
+                        validMoves.append(Move(x, y, x, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -439,7 +441,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x, y+i))
             else: 
-                validMoves.append(Move(x, y, x, y+i, False, True))
+                validMoves.append(Move(x, y, x, y+i, False, False, False))
                 
         canBeValid = True
         for i in range(1,8):
@@ -450,10 +452,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y-i][x].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x, y-i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x, y-i))
+                        validMoves.append(Move(x, y, x, y-i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -461,7 +464,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x, y-i))
             else: 
-                validMoves.append(Move(x, y, x, y-i, False, True))
+                validMoves.append(Move(x, y, x, y-i, False, False, False))
 
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
@@ -485,17 +488,19 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x+i, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x+i, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y+i))
+                        validMoves.append(Move(x, y, x+i, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
+                
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y+i))
             else: 
-                validMoves.append(Move(x, y, x+i, y+i, False, True))
+                validMoves.append(Move(x, y, x+i, y+i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -506,10 +511,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y-i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y-i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y-i))
+                        validMoves.append(Move(x, y, x-i, y-i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -517,7 +523,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x-i,y-i))
             else: 
-                validMoves.append(Move(x, y, x-i, y-i, False, True))
+                validMoves.append(Move(x, y, x-i, y-i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -528,10 +534,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y+i))
+                        validMoves.append(Move(x, y, x-i, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -539,7 +546,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x-i, y+i))
             else: 
-                validMoves.append(Move(x, y, x-i, y+i, False, True))
+                validMoves.append(Move(x, y, x-i, y+i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -553,7 +560,7 @@ def calculatePossibleMoves(boardList, x, y):
                         else:
                             validMoves.append(Move(x, y, x+i, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y-i))
+                        validMoves.append(Move(x, y, x+i, y-i, False, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -561,7 +568,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y-i))
             else: 
-                validMoves.append(Move(x, y, x+i, y-i, False, True))
+                validMoves.append(Move(x, y, x+i, y-i, False, True, False))
 
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
@@ -586,10 +593,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x+i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x+i, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x+i, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y+i))
+                        validMoves.append(Move(x, y, x+i, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -597,7 +605,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y+i))
             else: 
-                validMoves.append(Move(x, y, x+i, y+i, False, True))
+                validMoves.append(Move(x, y, x+i, y+i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -608,10 +616,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y-i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y-i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y-i))
+                        validMoves.append(Move(x, y, x-i, y-i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -619,7 +628,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x-i,y-i))
             else: 
-                validMoves.append(Move(x, y, x-i, y-i, False, True))
+                validMoves.append(Move(x, y, x-i, y-i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -630,10 +639,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y+i))
+                        validMoves.append(Move(x, y, x-i, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -641,7 +651,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x-i, y+i))
             else: 
-                validMoves.append(Move(x, y, x-i, y+i, False, True))
+                validMoves.append(Move(x, y, x-i, y+i, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -655,7 +665,7 @@ def calculatePossibleMoves(boardList, x, y):
                         else:
                             validMoves.append(Move(x, y, x+i, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y-i))
+                        validMoves.append(Move(x, y, x+i, y-i, False, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -663,7 +673,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y-i))
             else: 
-                validMoves.append(Move(x, y, x+i, y-i, False, True))
+                validMoves.append(Move(x, y, x+i, y-i, False, True, False))
         
         canBeValid = True
         for i in range(1,8):
@@ -677,7 +687,7 @@ def calculatePossibleMoves(boardList, x, y):
                         else:
                             validMoves.append(Move(x, y, x+i, y, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x+i, y))
+                        validMoves.append(Move(x, y, x+i, y, False, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -685,7 +695,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x+i,y))
             else: 
-                validMoves.append(Move(x, y, x+i, y, False, True))
+                validMoves.append(Move(x, y, x+i, y, False, True, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -696,18 +706,19 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y][x-i].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x-i, y, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x-i, y, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x-i, y))
+                        validMoves.append(Move(x, y, x-i, y, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
                 
             if canBeValid:
-                validMoves.append(Move(x,y,x-i,y))
+                validMoves.append(Move(x,y,x-i, y))
             else: 
-                validMoves.append(Move(x, y, x-i, y, False, True))
+                validMoves.append(Move(x, y, x-i,y, False, False, False))
 
         canBeValid = True
         for i in range(1,8):
@@ -718,10 +729,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y+i][x].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x, y+i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x, y+i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x, y+i))
+                        validMoves.append(Move(x, y, x, y+i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -729,7 +741,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x, y+i))
             else: 
-                validMoves.append(Move(x, y, x, y+i, False, True))
+                validMoves.append(Move(x, y, x, y+i, False, False, False))
                 
         canBeValid = True
         for i in range(1,8):
@@ -740,10 +752,11 @@ def calculatePossibleMoves(boardList, x, y):
                     if boardList[y-i][x].typeOfPiece == 'k':
                         if not canBeValid:
                             validMoves.append(Move(x, y, x, y-i, False, True))
+                            continue
                         else:
                             validMoves.append(Move(x, y, x, y-i, True, False))
                     if canBeValid:
-                        validMoves.append(Move(x, y, x, y-i))
+                        validMoves.append(Move(x, y, x, y-i, False, False))
                         canBeValid = False
                         continue
                 canBeValid = False
@@ -751,7 +764,7 @@ def calculatePossibleMoves(boardList, x, y):
             if canBeValid:
                 validMoves.append(Move(x,y,x, y-i))
             else: 
-                validMoves.append(Move(x, y, x, y-i, False, True))
+                validMoves.append(Move(x, y, x, y-i, False, False, False))
 
         for i in validMoves:
             if i.x > 7 or i.x < 0 or i.y > 7 or i.y < 0:
@@ -919,10 +932,25 @@ def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
         bestMove = ''
 
         for move in possibleMoves:
-            if move.pinned == True:
+            if not move.isValid:
                 continue
+
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'w')
+            
+            if move.pinned == True or move.isCheck:
+                moves = calculatePossibleMoves(copiedBoard,move.x,move.y)
+
+                shouldBreak = False
+                for j in moves:
+                    if not j.pinned:
+                        if copiedBoard[j.tgtY][j.tgtX].typeOfPiece == 'k' and copiedBoard[j.tgtY][j.tgtX].color == 'b':
+                            shouldBreak = True
+                            break
+
+                if shouldBreak:
+                    break
+
             eval,_ = minimax(copiedBoard, depth-1, alpha, beta, 'b', possibleMovesB, possibleMovesW)
             alpha = max(alpha, eval)
 
@@ -941,10 +969,23 @@ def minimax(board, depth, alpha, beta, color, possibleMovesB, possibleMovesW):
         bestMove = ''
 
         for move in possibleMoves:
-            if move.pinned == True:
+            if not move.isValid:
                 continue
+
             copiedBoard = copy.deepcopy(board)
             movePiece(copiedBoard,move.x,move.y,move.tgtX,move.tgtY,copiedBoard[move.y][move.x].typeOfPiece,'b')
+            if move.pinned == True or move.isCheck:
+                moves = calculatePossibleMoves(copiedBoard,move.x,move.y)
+
+                shouldBreak = False
+                for j in moves:
+                    if not j.pinned:
+                        if copiedBoard[j.tgtY][j.tgtX].typeOfPiece == 'k' and copiedBoard[j.tgtY][j.tgtX].color == 'w':
+                            shouldBreak = True
+                            break
+
+                if shouldBreak:
+                    break
             eval, _ = minimax(copiedBoard, depth-1, alpha, beta, 'w', possibleMovesB, possibleMovesW)
             beta = min(beta, eval)
 
@@ -972,6 +1013,17 @@ kingHasMoved = False
 
 import pandas as pd
 import PGNReader as pgn
+
+'''
+for every piece in the position that was either check or pin previously O(n)
+
+recalculate moves
+
+if board[move.tgtY][move.tgtX].typeOfPiece == 'k' and color == color:
+    break (we move on to the next candidate as this one was illegal)
+
+'''
+
 
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.linear_model import SGDClassifier
@@ -1284,7 +1336,7 @@ with open("scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 lambdaVal = 0
-maxDepth = 2
+maxDepth = 1
 
 while running:
     # poll for events
@@ -1336,9 +1388,9 @@ while running:
 
         startingTimestamp = time.time()
 
-        confidence, evalInf, moveInf, valid = inference(boardList, 'b')
+        # confidence, evalInf, moveInf, valid = inference(boardList, 'b')
 
-        evalInf *= lambdaVal
+        # evalInf *= lambdaVal
 
         valid = False
 
@@ -1346,8 +1398,8 @@ while running:
 
         if valid:
             print("inference move")
-            movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
-                    boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
+            # movePiece(boardList, moveInf.x, moveInf.y, moveInf.tgtX, moveInf.tgtY, 
+                    # boardList[moveInf.y][moveInf.x].typeOfPiece, 'b')
         else:
             eval, move = minimax(boardList, maxDepth, -math.inf, math.inf, 'b', [], [])
             print("minimax move")
@@ -1357,7 +1409,7 @@ while running:
         playerTurn = True
         turnNumber += 1
 
-        print(f'Turn number : {turnNumber}. Eval : {evalInf}. Move time : {time.time()-startingTimestamp}. Calls : {calls}')
+        # print(f'Turn number : {turnNumber}. Eval : {evalInf}. Move time : {time.time()-startingTimestamp}. Calls : {calls}')
 
     rendering() 
 

@@ -23,14 +23,16 @@ class Move:
     tgtY = 0
     isCheck = False
     pinned = False
+    isValid = True
 
-    def __init__(self, x, y, tgtX, tgtY, isCheck=False, pinned=False):
+    def __init__(self, x, y, tgtX, tgtY, isCheck=False, pinned=False, isValid=True):
         self.x = x
         self.y = y
         self.tgtX = tgtX
         self.tgtY = tgtY
         self.isCheck = isCheck
         self.pinned = pinned
+        self.isValid = isValid
 
     def unpack(self):
         return self.x,self.y,self.tgtX,self.tgtY
